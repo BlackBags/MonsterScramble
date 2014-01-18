@@ -1,7 +1,7 @@
 #include "main.h"
-#include "config.h"
 #include "AppDelegate.h"
 #include "CCEGLView.h"
+#include "GameLogic.h"
 
 USING_NS_CC;
 
@@ -15,6 +15,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     // create the application instance
     AppDelegate app;
+	CGameLogic::GetInstance()->init();
     CCEGLView* eglView = CCEGLView::sharedOpenGLView();
     eglView->setViewName("MonsterScramble");
     eglView->setFrameSize(WINDOW_WIDTH, WINDOW_HEIGHT);

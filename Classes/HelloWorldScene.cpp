@@ -60,7 +60,6 @@ bool HelloWorld::init()
     // position the label on the center of the screen
     pLabel->setPosition(ccp(origin.x + visibleSize.width/2,
                             origin.y + visibleSize.height - pLabel->getContentSize().height));
-
     // add the label as a child to this layer
     this->addChild(pLabel, 1);
 

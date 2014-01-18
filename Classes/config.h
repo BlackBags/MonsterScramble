@@ -1,3 +1,4 @@
+#include "ccTypes.h"
 /*	게임 화면 기본 크기입니다 */
 const int WINDOW_WIDTH = 1250;
 const int WINDOW_HEIGHT = 700;
@@ -5,6 +6,9 @@ const int WINDOW_HEIGHT = 700;
 
 /*	최대 플레이 가능 인원입니다 */
 const int MAX_PLAYER_NUM= 4;
+
+/* 캐릭터 수 입니다 */
+const int CHARACTER_NUM = 4;
 
 
 /*	메인 메뉴 오브젝트들의 기본 크기입니다 */
@@ -194,6 +198,13 @@ const int	SC_RT_SCORE_TRASH = -10;
 #define _COLOR_PLAYER_2_ 28.0f/255, 171.0f/255, 203.0f/255, 0.75f
 #define _COLOR_PLAYER_3_ 206.0f/255, 62.0f/255, 5.0f/255, 0.6f
 #define _COLOR_PLAYER_4_ 241.0f/255, 196.0f/255, 15.0f/255, 0.75f
+
+/* 캐릭터 색상입니다 */
+#define _COLOR_CHARACTER_1_  26,196,98,255
+#define  _COLOR_CHARACTER_2_  28,171,203,255
+#define  _COLOR_CHARACTER_3_  206, 62,5,255
+#define  _COLOR_CHARACTER_4_  241,196,15,255
+
 
 /*	enum 타입들입니다. */
 enum SceneName	//Scene 이름들
