@@ -4,10 +4,18 @@
 class CGameManager
 {
 public:
-	//create 사용 안 하고 수동으로 관리할까?
-	//그럼 생성자 소멸자 필요
+	CGameManager(void);
+	~CGameManager(void);
+
+	static CGameManager* CGameManager::GetInstance();
+	static void				ReleaseInstance();
 	
 	bool init();
+
+
+private:
+
+	static CGameManager*	m_pInstance; //singleton instance
 
 	// implement the "static node()" method manually
     //CREATE_FUNC(CGameManager);

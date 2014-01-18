@@ -75,21 +75,69 @@ public:
 	void		SetPlayerNumber(int playerNumber)			{m_PlayerNumber = playerNumber;}
 	int			GetplayerNumber()							{return m_PlayerNumber; }
 
+	bool IsPossible(IndexedPosition indexedPosition);
+	bool IsClosed(IndexedPosition indexedPosition);
+
+	/*	주어진 index의 울타리 주변 타일을 확인 합니다 */
+	void CollectClosedTile(IndexedPosition indexedPosition, Direction direction);
+
+	/*	IsClosed함수에서 탐색 중인 타일이 이미 탐색된 곳인지 체크하는 함수입니다 */
+	bool IsAlreadyChecked(const IndexedPosition& nextTile);
+
 	void		UpdatePlayerResult(int playerId, MO_ITEM item);
 	int			GetPlayerResult(int playerId, MO_ITEM item);
 
 	void		UpdatePlayerScore(int playerId, int score) { m_PlayerData[playerId].m_MyTotalScore += score; }
 	int			GetPlayerTotalScore(int playerId) {return m_PlayerData[playerId].m_MyTotalScore; }
 
+	bool IsEnd();
+
+	/*	애니메이션 상태를 지정, 반환하는 함수들 */
+	bool		GetLineAnimationFlag()						{ return m_LineAnimationFlag; }
+	int			GetTileAnimationTurnNumber()				{ return m_TileAnimationTurnNumber; }
+	void		SetTileAnimationTurnNumber(int turnNumber)	{ m_TileAnimationTurnNumber = turnNumber; }
+	void		SetAnimationState(IndexedPosition indexedPosition, int turn, Direction direction);
+	void		InitAnimationState(IndexedPosition indexedPosition);
+	void		SetTileAnimationTurn(int turn)				{ m_TileAnimationTurn = turn; }
+	int			GetTileAnimationTurn(IndexedPosition indexedPosition);
+
 private:
 	static CGameLogic*	m_pInstance; //singleton instance
 
 	MapSize				m_MapSize;
 	int						m_PlayerNumber;
+	int						m_CurrentTurn;
 
 	std::array<PlayerData, MAX_PLAYER_NUM> m_PlayerData;
 	std::array<Character, CHARACTER_NUM> m_Character;
 
+	//플레이 순서에 매칭되는 플레이어의 ID
+	std::array<int, MAX_PLAYER_NUM> m_PlayerIdByTurn;
+
+	/*	맵 관련 변수들 */
+
+	//맵에 대한 정보를 저장하기 위한 배열 ( 실제 게임 상황이 실시간으로 업데이트 되어야 하는 배열 ) 
+	//조심해!! MapObjMap은 이름이 왜 저모양인지?
+	template <typename IType, int ROW, int COL>
+	struct array2d_
+	{
+		typedef std::array< std::array<IType, COL>, ROW> type ;
+	} ;
+
+	typedef array2d_<MapObject, MAX_MAP_WIDTH, MAX_MAP_HEIGHT>::type MapObjMap ;
+	MapObjMap m_Map;
+
+	/*	주인이 없는 타일의 수를 저장하는 변수 : 종료 조건을 쉽게 확인하기 위해서 생성 */
+	int	m_VoidTileCount;
+	
+	/* 닫힌 도형 검사용 배열 */
+	std::array<IndexedPosition, CHECKLIST_LENGTH> m_ClosedTile;
+
+	/* 애니메이션 관련 변수들 */
+	bool	m_LineAnimationFlag;
+	int		m_TileAnimationTurnNumber;
+	int		m_TileAnimationTurn;
+	bool	m_TileAnimationTurnOver;
 
 	// implement the "static node()" method manually
     //CREATE_FUNC(CGameLogic);

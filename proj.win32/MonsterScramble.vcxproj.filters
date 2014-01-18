@@ -117,4 +117,9 @@
       <Filter>Classes\Logic\GameLogic</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Memo.txt">
+      <Filter>Utility</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
