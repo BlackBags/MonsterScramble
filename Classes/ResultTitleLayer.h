@@ -6,7 +6,8 @@ class CResultTitleLayer : public cocos2d::CCLayer
 public:
 	virtual bool init();
 
-	//점수 받아 오기
+	// a selector callback
+    void mainSceneCallback(CCObject* pSender);
 
 	// implement the "static node()" method manually
     CREATE_FUNC(CResultTitleLayer);

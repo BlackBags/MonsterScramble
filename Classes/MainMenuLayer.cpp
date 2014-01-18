@@ -1,5 +1,7 @@
 #include "MainMenuLayer.h"
-#include "HelloWorldScene.h"
+
+//for test
+#include "ResultScene.h"
 
 USING_NS_CC;
 
@@ -24,7 +26,8 @@ bool CMainMenuLayer::init()
 										"MAIN_newgame.png",
 										"MAIN_newgame_selected.png",
 										this,
-										menu_selector(CMainMenuLayer::newgameCallback));
+										menu_selector(CMainMenuLayer::newgameCallback)
+										);
     
 	tempYPos = visibleSize.height/2 - pNewgame->getContentSize().height/2;
 
@@ -39,7 +42,8 @@ bool CMainMenuLayer::init()
 										"MAIN_multiplay.png",
 										"MAIN_multiplay_selected.png",
 										this,
-										menu_selector(CMainMenuLayer::multiplayCallback));
+										menu_selector(CMainMenuLayer::multiplayCallback)
+										);
     
 	tempYPos -= pMultiplay->getContentSize().height;
 
@@ -54,7 +58,8 @@ bool CMainMenuLayer::init()
 										"MAIN_credit.png",
 										"MAIN_credit_selected.png",
 										this,
-										menu_selector(CMainMenuLayer::creditCallback));
+										menu_selector(CMainMenuLayer::creditCallback)
+										);
     
 	tempYPos -= pCredit->getContentSize().height;
 
@@ -69,7 +74,8 @@ bool CMainMenuLayer::init()
 										"MAIN_exit.png",
 										"MAIN_exit_selected.png",
 										this,
-										menu_selector(CMainMenuLayer::exitCallback));
+										menu_selector(CMainMenuLayer::exitCallback)
+										);
     
 	tempYPos -= pExit->getContentSize().height;
 
@@ -112,8 +118,8 @@ void CMainMenuLayer::creditCallback(CCObject* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
 	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
 #else
-    //CCDirector::sharedDirector()->end(); //credit load
-	CCScene* newScene = HelloWorld::scene();
+	//for test
+	CCScene* newScene = CResultScene::create();
 	CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, newScene) );
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);

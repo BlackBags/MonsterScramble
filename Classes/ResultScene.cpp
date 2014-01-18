@@ -1,7 +1,7 @@
 #include "ResultScene.h"
 #include "BackgroundLayer.h"
-#include "MainTitleLayer.h"
-#include "MainMenuLayer.h"
+#include "ResultScoreLayer.h"
+#include "ResultTitleLayer.h"
 
 USING_NS_CC;
 
@@ -20,13 +20,13 @@ bool CResultScene::init(void)
 
 	this->addChild(BackgroundLayer, 0);
 
-	CCLayer* titleLayer = CMainTitleLayer::create();
+	CCLayer* titleLayer = CResultTitleLayer::create();
 
 	this->addChild(titleLayer, 1);
 
-	CCLayer* mainMenuLayer = CMainMenuLayer::create();
+	CCLayer* scoreLayer = CResultScoreLayer::create();
 
-	this->addChild(mainMenuLayer, 1);
+	this->addChild(scoreLayer, 1);
 
 	return true;
 }
