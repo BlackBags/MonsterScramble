@@ -260,3 +260,8 @@ struct MapSize //맵 크기값을 위한 구조체입니다
 	int m_Height;
 };
 
+enum PlayerType
+{
+	PT_PLAYER,
+	PT_AI
+};
