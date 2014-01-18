@@ -7,7 +7,7 @@
 //플레이어 데이터
 struct PlayerData
 {
-	PlayerData() : m_PlayerId(-1),m_PlayerName(""),m_CharacterId(-1),m_PlayerTurn(-1),
+	PlayerData() : m_PlayerId(-1),m_PlayerName("꿀호떡"),m_CharacterId(-1),m_PlayerTurn(-1),
 						m_MyTile(0), m_MyGold(0), m_MyTrash(0), m_MyTotalScore(0) {}
 
 	//플레이어의 고유 아이디 ( 온라인 모드일 시 clientID를 의미 )
