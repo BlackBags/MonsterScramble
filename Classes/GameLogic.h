@@ -40,6 +40,8 @@ struct Character
 class CGameLogic
 {
 public:
+	CGameLogic(void);
+	~CGameLogic(void);
 	static CGameLogic* CGameLogic::GetInstance();
 	static void				ReleaseInstance();
 	bool init();
