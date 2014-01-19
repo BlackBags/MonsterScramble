@@ -134,14 +134,19 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\GameLogic.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
+    <ClCompile Include="..\Classes\GameSettingScene.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\BackgroundLayer.cpp" />
     <ClCompile Include="..\Classes\MainMenuLayer.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\MainTitleLayer.cpp" />
+    <ClCompile Include="..\Classes\PlayerNameSetting.cpp" />
     <ClCompile Include="..\Classes\ResultScene.cpp" />
     <ClCompile Include="..\Classes\ResultScoreLayer.cpp" />
     <ClCompile Include="..\Classes\ResultTitleLayer.cpp" />
+    <ClCompile Include="..\Classes\SettingCharacterLayer.cpp" />
+    <ClCompile Include="..\Classes\SettingMapLayer.cpp" />
+    <ClCompile Include="..\Classes\SettingTitleLayer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,14 +154,19 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClInclude Include="..\Classes\config.h" />
     <ClInclude Include="..\Classes\GameLogic.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
+    <ClInclude Include="..\Classes\GameSettingScene.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\BackgroundLayer.h" />
     <ClInclude Include="..\Classes\MainMenuLayer.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\MainTitleLayer.h" />
+    <ClInclude Include="..\Classes\PlayerNameSetting.h" />
     <ClInclude Include="..\Classes\ResultScene.h" />
     <ClInclude Include="..\Classes\ResultScoreLayer.h" />
     <ClInclude Include="..\Classes\ResultTitleLayer.h" />
+    <ClInclude Include="..\Classes\SettingCharacterLayer.h" />
+    <ClInclude Include="..\Classes\SettingMapLayer.h" />
+    <ClInclude Include="..\Classes\SettingTitleLayer.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

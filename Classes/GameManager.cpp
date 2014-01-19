@@ -70,6 +70,18 @@ int CGameManager::GetPlayerNumber()
 	}
 }
 
+void CGameManager::SetPlayerNumber(int PlayerNumber)
+{
+	if (m_IsOnlineGame)
+	{
+		//server로 패킷을 보낸다.
+	}
+	else
+	{
+		CGameLogic::GetInstance()->SetPlayerNumber(PlayerNumber);
+	}
+}
+
 int CGameManager::GetWinnerIdx()
 {
 	if (m_IsOnlineGame)
@@ -139,7 +151,7 @@ bool CGameManager::isCharacterSelected( int characterId )
 	}
 	else
 	{
-		CGameLogic::GetInstance()->isCharacterSelected(characterId);
+		return CGameLogic::GetInstance()->isCharacterSelected(characterId);
 	}
 }
 
@@ -151,7 +163,7 @@ int CGameManager::GetCharacterId( int playerId )
 	}
 	else
 	{
-		CGameLogic::GetInstance()->GetPlayerCharacterId( playerId );
+		return CGameLogic::GetInstance()->GetPlayerCharacterId( playerId );
 	}
 }
 
@@ -162,5 +174,6 @@ void CGameManager::SetRandomPlayerTurn()
 
 int CGameManager::GetPlayerIdByTurn( int currentTurn )
 {
-
+	// 조심해!!
+	return 0;
 }

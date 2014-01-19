@@ -37,6 +37,12 @@
     <Filter Include="Classes\Layer\Result">
       <UniqueIdentifier>{7fdff93d-bac2-4923-9154-4e0a6ae6b9a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scene\GameSettingScene">
+      <UniqueIdentifier>{f06ac9a6-20b1-438f-b9dc-34591a98d3f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Layer\GameSetting">
+      <UniqueIdentifier>{91f68ffc-89aa-44d1-a329-95979b178de5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +80,21 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameLogic.cpp">
       <Filter>Classes\Logic\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameSettingScene.cpp">
+      <Filter>Classes\Scene\GameSettingScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SettingTitleLayer.cpp">
+      <Filter>Classes\Layer\GameSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SettingCharacterLayer.cpp">
+      <Filter>Classes\Layer\GameSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayerNameSetting.cpp">
+      <Filter>Classes\Layer\GameSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SettingMapLayer.cpp">
+      <Filter>Classes\Layer\GameSetting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +136,21 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameLogic.h">
       <Filter>Classes\Logic\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameSettingScene.h">
+      <Filter>Classes\Scene\GameSettingScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SettingTitleLayer.h">
+      <Filter>Classes\Layer\GameSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SettingCharacterLayer.h">
+      <Filter>Classes\Layer\GameSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayerNameSetting.h">
+      <Filter>Classes\Layer\GameSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SettingMapLayer.h">
+      <Filter>Classes\Layer\GameSetting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

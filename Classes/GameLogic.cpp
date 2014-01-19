@@ -32,9 +32,9 @@ void CGameLogic::ReleaseInstance()
 bool CGameLogic::init()
 {
 	//캐릭터 관련 자료를 넣어준다.
-	for (int i = 0;i<CHARACTER_NUM;++i)
+	for (int i = 0; i<CHARACTER_NUM; ++i)
 	{
-		switch(i)
+		switch (i)
 		{
 		case 0:
 			m_Character[0].m_CharacterName = "Green";
