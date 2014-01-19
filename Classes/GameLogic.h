@@ -136,6 +136,14 @@ private:
 	/* 닫힌 도형 검사용 배열 */
 	std::array<IndexedPosition, CHECKLIST_LENGTH> m_ClosedTile;
 
+	/*	타일 탐색 시 탐색 여부를 확인하는 flag 지정 및 확인 */
+	void		SetMapFlag(IndexedPosition indexedPosition,bool flag);
+	bool		GetMapFlag(IndexedPosition indexedPosition) { return m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Flag; }
+
+	/* 타일의 타입을 가져오는 함수 */
+	MO_TYPE		GetMapType(IndexedPosition indexedPosition) { return m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type;}
+	MO_TYPE		GetMapType(const int& i, const int& j) { return GetMapType(IndexedPosition(i, j) );}
+
 	/* 애니메이션 관련 변수들 */
 	bool	m_LineAnimationFlag;
 	int		m_TileAnimationTurnNumber;

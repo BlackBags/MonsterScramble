@@ -18,8 +18,23 @@ public:
 	//게임이 온라인인지 오프라인인지 설정
 	void SetOnlineMode(bool flag)	{ m_IsOnlineGame = flag; }
 
-	//플레이어 이름 받아 오기
+	/*게임 셋팅 관련*/
+	void SetPlayerName(const std::string& playerName);
 	const std::string& GetPlayerName(int playerIdx);
+
+	void SelectCharacter(int playerId, int characterId);
+	bool isCharacterSelected(int characterId);
+	int	  GetCharacterId(int playerId, int characterId);
+
+	void SetRandomPlayerTurn();
+	int  GetPlayerIdByTurn(int currentTurn);
+	
+	/* 게임 진행 관련 : 실시간 점수 계산은 로직 쪽에서 하도록 한다.*/
+	void UpdateGameMap();
+	bool isEnd();
+	bool isPossible();
+	bool isClosed();
+	
 
 	//result scene 관련
 	int GetWinnerIdx();

@@ -376,3 +376,8 @@ int	CGameLogic::GetWinnerIdx()
 
 	return result;
 }
+
+void CGameLogic::SetMapFlag( IndexedPosition indexedPosition,bool flag )
+{
+	m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Flag = flag;
+}
