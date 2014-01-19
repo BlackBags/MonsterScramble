@@ -358,4 +358,21 @@ int	CGameLogic::GetTileAnimationTurn(IndexedPosition indexedPosition)
 	return m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_AnimationTurn;
 }
 
+int	CGameLogic::GetWinnerIdx()
+{
+	int result = -1;
 
+	for (int i = 1; i < CGameLogic::GetInstance()->GetplayerNumber(); ++i)
+	{
+		if (CGameLogic::GetInstance()->GetPlayerTotalScore(i - 1) > CGameLogic::GetInstance()->GetPlayerTotalScore(i) )
+		{
+			result = i -1;
+		}
+		else
+		{
+			result = i;
+		}
+	}
+
+	return result;
+}

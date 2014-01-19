@@ -54,20 +54,21 @@ public:
 
 	bool init();
 
+	//이 함수는 필요 없을 것 같음. m_PlayerId = playerIdx 이므로 이미 알고 있는 정보를 다시 요청하는 것 같음
 	int GetPlayerId(int playerIdx) {return m_PlayerData[playerIdx].m_PlayerId; }
 
 	//캐릭터를 플레이어에게 짝지어 준다.
-	void SetPlayerCharacterId(int playerId, int characterId) { m_PlayerData[playerId].m_CharacterId = characterId;}
+	void SetPlayerCharacterId(int playerId, int characterId)	{ m_PlayerData[playerId].m_CharacterId = characterId;}
 
-	const std::string& GetPlayerName(int playerId)			{ return m_PlayerData[playerId].m_PlayerName; }
+	const std::string& GetPlayerName(int playerId)				{ return m_PlayerData[playerId].m_PlayerName; }
 	
 	const std::string& GetPlayerSettingImage(int playerId)		{ return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterSettingImage; }
 	const std::string& GetPlayerPlayImage(int playerId)			{ return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterPlayImage; } 
-	const std::string& GetPlayerResultImage(int playerId) { return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterResultImage; }
-	const cocos2d::ccColor4B& GetPlayerColor(int playerId) { return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterColor; }
+	const std::string& GetPlayerResultImage(int playerId)		{ return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterResultImage; }
+	const cocos2d::ccColor4B& GetPlayerColor(int playerId)		{ return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterColor; }
 
-	void SetPlayerTurn(int playerId, int turn)				{ m_PlayerData[playerId].m_PlayerTurn = turn; }
-	int GetPlayerTurn(int palyerId)							{ return m_PlayerData[palyerId].m_PlayerTurn; }
+	void SetPlayerTurn(int playerId, int turn)					{ m_PlayerData[playerId].m_PlayerTurn = turn; }
+	int GetPlayerTurn(int palyerId)								{ return m_PlayerData[palyerId].m_PlayerTurn; }
 
 	void		SetMapSize(int x, int y);
 	MapSize		GetMapSize() {return m_MapSize;}
@@ -87,18 +88,20 @@ public:
 	void		UpdatePlayerResult(int playerId, MO_ITEM item);
 	int			GetPlayerResult(int playerId, MO_ITEM item);
 
-	void		UpdatePlayerScore(int playerId, int score) { m_PlayerData[playerId].m_MyTotalScore += score; }
-	int			GetPlayerTotalScore(int playerId) {return m_PlayerData[playerId].m_MyTotalScore; }
+	void		UpdatePlayerScore(int playerId, int score)	{ m_PlayerData[playerId].m_MyTotalScore += score; }
+	int			GetPlayerTotalScore(int playerId)			{return m_PlayerData[playerId].m_MyTotalScore; }
+
+	int			GetWinnerIdx();
 
 	bool IsEnd();
 
 	/*	애니메이션 상태를 지정, 반환하는 함수들 */
-	bool		GetLineAnimationFlag()						{ return m_LineAnimationFlag; }
-	int			GetTileAnimationTurnNumber()				{ return m_TileAnimationTurnNumber; }
-	void		SetTileAnimationTurnNumber(int turnNumber)	{ m_TileAnimationTurnNumber = turnNumber; }
+	bool		GetLineAnimationFlag()									{ return m_LineAnimationFlag; }
+	int			GetTileAnimationTurnNumber()							{ return m_TileAnimationTurnNumber; }
+	void		SetTileAnimationTurnNumber(int turnNumber)				{ m_TileAnimationTurnNumber = turnNumber; }
 	void		SetAnimationState(IndexedPosition indexedPosition, int turn, Direction direction);
 	void		InitAnimationState(IndexedPosition indexedPosition);
-	void		SetTileAnimationTurn(int turn)				{ m_TileAnimationTurn = turn; }
+	void		SetTileAnimationTurn(int turn)							{ m_TileAnimationTurn = turn; }
 	int			GetTileAnimationTurn(IndexedPosition indexedPosition);
 
 private:

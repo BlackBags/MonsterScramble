@@ -1,4 +1,6 @@
+#pragma once
 #include "ccTypes.h"
+
 /*	게임 화면 기본 크기입니다 */
 const int WINDOW_WIDTH = 1250;
 const int WINDOW_HEIGHT = 700;
