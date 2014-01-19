@@ -16,7 +16,7 @@ bool CBackgroundLayer::init()
 
 	/////////////////////////////
     // 2. add a background image
-	CCSprite* pBackground = CCSprite::create("background.png");
+	CCSprite* pBackground = CCSprite::create("image/background.png");
 
 	pBackground->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 

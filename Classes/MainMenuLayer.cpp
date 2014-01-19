@@ -23,8 +23,8 @@ bool CMainMenuLayer::init()
 	CCMenu* pMenu = nullptr;
 
 	CCMenuItemImage *pNewgame = CCMenuItemImage::create(
-										"MAIN_newgame.png",
-										"MAIN_newgame_selected.png",
+										"image/MAIN_newgame.png",
+										"image/MAIN_newgame_selected.png",
 										this,
 										menu_selector(CMainMenuLayer::newgameCallback)
 										);
@@ -39,8 +39,8 @@ bool CMainMenuLayer::init()
 	this->addChild(pMenu, 1);
 
 	CCMenuItemImage *pMultiplay = CCMenuItemImage::create(
-										"MAIN_multiplay.png",
-										"MAIN_multiplay_selected.png",
+										"image/MAIN_multiplay.png",
+										"image/MAIN_multiplay_selected.png",
 										this,
 										menu_selector(CMainMenuLayer::multiplayCallback)
 										);
@@ -55,8 +55,8 @@ bool CMainMenuLayer::init()
 	this->addChild(pMenu, 1);
 
 	CCMenuItemImage *pCredit = CCMenuItemImage::create(
-										"MAIN_credit.png",
-										"MAIN_credit_selected.png",
+										"image/MAIN_credit.png",
+										"image/MAIN_credit_selected.png",
 										this,
 										menu_selector(CMainMenuLayer::creditCallback)
 										);
@@ -71,8 +71,8 @@ bool CMainMenuLayer::init()
 	this->addChild(pMenu, 1);
 
 	CCMenuItemImage *pExit = CCMenuItemImage::create(
-										"MAIN_exit.png",
-										"MAIN_exit_selected.png",
+										"image/MAIN_exit.png",
+										"image/MAIN_exit_selected.png",
 										this,
 										menu_selector(CMainMenuLayer::exitCallback)
 										);
