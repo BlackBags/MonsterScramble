@@ -19,12 +19,12 @@ public:
 	void SetOnlineMode(bool flag)	{ m_IsOnlineGame = flag; }
 
 	/*게임 셋팅 관련*/
-	void SetPlayerName(const std::string& playerName);
+	void SetPlayerName(int playerId, const std::string& playerName);
 	const std::string& GetPlayerName(int playerIdx);
 
 	void SelectCharacter(int playerId, int characterId);
 	bool isCharacterSelected(int characterId);
-	int	  GetCharacterId(int playerId, int characterId);
+	int	  GetCharacterId(int playerId);
 
 	void SetRandomPlayerTurn();
 	int  GetPlayerIdByTurn(int currentTurn);

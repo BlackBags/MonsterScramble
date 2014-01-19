@@ -381,3 +381,19 @@ void CGameLogic::SetMapFlag( IndexedPosition indexedPosition,bool flag )
 {
 	m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Flag = flag;
 }
+
+void CGameLogic::SetPlayerName(int playerId,  const std::string& playerName )
+{
+	m_PlayerData[playerId].m_PlayerName = playerName;
+}
+
+void CGameLogic::SetPlayerCharacterId( int playerId, int characterId )
+{
+	//이미 선택했던 캐릭터가 있다면 이전 캐릭터는 풀어준다.
+	if (m_PlayerData[playerId].m_CharacterId != -1)
+	{
+		m_Character[m_PlayerData[playerId].m_CharacterId].m_isCharacterSelected = false;
+	}
+	m_PlayerData[playerId].m_CharacterId = characterId; 
+	m_Character[characterId].m_isCharacterSelected = true;
+}

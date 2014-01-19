@@ -33,6 +33,19 @@ bool CGameManager::init()
 }
 
 
+void CGameManager::SetPlayerName(int playerId,  const std::string& playerName )
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		CGameLogic::GetInstance()->SetPlayerName(playerId,playerName);
+	}
+}
+
+
 const std::string& CGameManager::GetPlayerName(int playerIdx)
 {
 	if (m_IsOnlineGame)
@@ -104,4 +117,50 @@ const std::string& CGameManager::GetCharacterResultFaceFileName(int playerIdx)
 	{
 		return CGameLogic::GetInstance()->GetPlayerResultImage(playerIdx);
 	}
+}
+
+void CGameManager::SelectCharacter( int playerId, int characterId )
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		CGameLogic::GetInstance()->SetPlayerCharacterId(playerId,characterId);
+	}
+}
+
+bool CGameManager::isCharacterSelected( int characterId )
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		CGameLogic::GetInstance()->isCharacterSelected(characterId);
+	}
+}
+
+int CGameManager::GetCharacterId( int playerId )
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		CGameLogic::GetInstance()->GetPlayerCharacterId( playerId );
+	}
+}
+
+void CGameManager::SetRandomPlayerTurn()
+{
+
+}
+
+int CGameManager::GetPlayerIdByTurn( int currentTurn )
+{
+
 }

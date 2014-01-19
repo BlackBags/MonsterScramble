@@ -30,7 +30,7 @@ struct PlayerData
 //몬스터 캐릭터에 관한 자료 ( 추가 필요 )
 struct Character
 {
-	Character() : m_CharacterName("") {}
+	Character() : m_CharacterName(""),m_isCharacterSelected(false) {}
 
 	std::string m_CharacterName;
 
@@ -40,7 +40,7 @@ struct Character
 	std::string m_CharacterPlayImage;
 	std::string m_CharacterResultImage;
 	std::string m_CharacterVoice;
-
+	bool m_isCharacterSelected;
 };
 
 class CGameLogic
@@ -58,8 +58,11 @@ public:
 	int GetPlayerId(int playerIdx) {return m_PlayerData[playerIdx].m_PlayerId; }
 
 	//캐릭터를 플레이어에게 짝지어 준다.
-	void SetPlayerCharacterId(int playerId, int characterId)	{ m_PlayerData[playerId].m_CharacterId = characterId;}
+	void SetPlayerCharacterId(int playerId, int characterId);
+	bool isCharacterSelected(int characterId) {return m_Character[characterId].m_isCharacterSelected;}
+	int   GetPlayerCharacterId(int playerId) { return m_PlayerData[playerId].m_CharacterId;}
 
+	void   SetPlayerName(int playerId, const std::string& playerName);
 	const std::string& GetPlayerName(int playerId)				{ return m_PlayerData[playerId].m_PlayerName; }
 	
 	const std::string& GetPlayerSettingImage(int playerId)		{ return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterSettingImage; }
