@@ -608,8 +608,8 @@ void CGameLogic::InitRandomMap()
 
 	while (startGoldNumber)
 	{
-		RandomTargetPosition.m_PosI = rand() % MAX_MAP_HEIGHT + 2;
-		RandomTargetPosition.m_PosJ = rand() % MAX_MAP_WIDTH + 2;
+		RandomTargetPosition.m_PosI = rand() % MAX_MAP_HEIGHT;
+		RandomTargetPosition.m_PosJ = rand() % MAX_MAP_WIDTH;
 		if (GetMapType(RandomTargetPosition) == MO_TILE 
 			&& GetItem(RandomTargetPosition) == ITEM_NOTHING)
 		{
@@ -620,8 +620,8 @@ void CGameLogic::InitRandomMap()
 
 	while (startTrashNumber)
 	{
-		RandomTargetPosition.m_PosI = rand() % MAX_MAP_HEIGHT + 2;
-		RandomTargetPosition.m_PosJ = rand() % MAX_MAP_WIDTH + 2;
+		RandomTargetPosition.m_PosI = rand() % MAX_MAP_HEIGHT;
+		RandomTargetPosition.m_PosJ = rand() % MAX_MAP_WIDTH;
 		if (GetMapType(RandomTargetPosition) == MO_TILE 
 			&& GetItem(RandomTargetPosition) == ITEM_NOTHING)
 		{
