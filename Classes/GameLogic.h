@@ -82,6 +82,8 @@ public:
 
 	/*	Setting Scene 관련에서 게임 시작까지	*/
 	void StartGame();
+	void CreateMap();
+	void InitRandomMap();
 
 	/*	주어진 index의 울타리 주변 타일을 확인 합니다 */
 	void CollectClosedTile(IndexedPosition indexedPosition, Direction direction);
@@ -148,6 +150,15 @@ private:
 	/* 타일의 타입을 가져오는 함수 */
 	MO_TYPE		GetMapType(IndexedPosition indexedPosition) { return m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type;}
 	MO_TYPE		GetMapType(const int& i, const int& j) { return GetMapType(IndexedPosition(i, j) );}
+
+	/*	타일의 선을 연결하는 함수	*/
+	void DrawLine(const IndexedPosition& indexedPosition);
+	void DeleteLine( const IndexedPosition& indexedPosition );
+
+	/*	아이템 관련 함수 */
+	void		SetItem(IndexedPosition indexedPosition, MO_ITEM item);
+	MO_ITEM		GetItem(IndexedPosition indexedPosition)	{ return m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Item; }
+
 
 	/* 애니메이션 관련 변수들 */
 	bool	m_LineAnimationFlag;

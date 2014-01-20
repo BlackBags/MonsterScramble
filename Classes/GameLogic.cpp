@@ -36,6 +36,22 @@ bool CGameLogic::init()
 {
 	m_SelectedMapSize = MS_NOT_SELECTED;
 
+	for (int i = 0; i < MAX_MAP_HEIGHT; ++i)
+	{
+		for (int j = 0; j < MAX_MAP_WIDTH; ++j)
+		{
+			m_Map[i][j].m_AnimationFlag = false;
+			m_Map[i][j].m_AnimationTurn = 0;
+			m_Map[i][j].m_Direction = DI_UP;
+			m_Map[i][j].m_Flag = false;
+			m_Map[i][j].m_Item = ITEM_NOTHING;
+			m_Map[i][j].m_MouseOverFlag = false;
+			m_Map[i][j].m_Owner = MO_NOBODY;
+			m_Map[i][j].m_StartTime = 0;
+			m_Map[i][j].m_Type = MO_SENTINEL;
+		}
+	}
+
 	// PlayerData를 만들어서 할당
 	for (int i = 0; i < MAX_PLAYER_NUM; ++i)
 	{
@@ -264,7 +280,7 @@ void CGameLogic::CollectClosedTile( IndexedPosition indexedPosition, Direction d
 					m_ClosedTile[i].m_PosJ = 0;
 				}
 #ifdef _DEBUG
-			CCLOG("센티넬을 만났다\n");
+				CCLOG("센티넬을 만났다\n");
 #endif
 				break;
 			}
@@ -406,10 +422,10 @@ void CGameLogic::SetPlayerName(int playerId,  const std::string& playerName )
 void CGameLogic::SetPlayerCharacterId( int characterId )
 {
 	// IsCharacterSelected 검사를 해서 선택되어 있으면 못 하게
-// 	if ( isCharacterSelected(characterId) )
-// 	{
-// 		return;
-// 	}
+	// 	if ( isCharacterSelected(characterId) )
+	// 	{
+	// 		return;
+	// 	}
 
 	// Single 일 때
 	// 이미 선택된 캐릭터인지 확인해서 선택되어 있다면 취소시키고 리턴
@@ -437,14 +453,224 @@ void CGameLogic::SetPlayerCharacterId( int characterId )
 
 	// 이 밑의 코드는 안 쓴다!
 	//이미 선택했던 캐릭터가 있다면 이전 캐릭터는 풀어준다.
-// 	if (m_PlayerData[playerId]->m_CharacterId != -1)
-// 	{
-// 		m_Character[m_PlayerData[playerId]->m_CharacterId].m_isCharacterSelected = false;
-// 	}
-// 	m_PlayerData[playerId]->m_CharacterId = characterId;
+	// 	if (m_PlayerData[playerId]->m_CharacterId != -1)
+	// 	{
+	// 		m_Character[m_PlayerData[playerId]->m_CharacterId].m_isCharacterSelected = false;
+	// 	}
+	// 	m_PlayerData[playerId]->m_CharacterId = characterId;
 }
 
 void CGameLogic::StartGame()
 {
+	// 턴 생성 & 플레이어별로 턴 저장
+	for (int i = 0 ; i < MAX_PLAYER_NUM; ++i)
+	{
+		// PlayerId가 -1이 아닐 경우에만 TurnList에 랜덤한 순서로 넣어준다.
+		if ( m_PlayerData[i]->m_PlayerId != -1 )
+		{
+			int currentListSize = m_PlayerDataByTurn.size();
 
+			int randomPosition = rand() % ( currentListSize + 1 );
+
+			std::list<PlayerData*>::iterator iterInsertPos = m_PlayerDataByTurn.begin();
+
+			for (int j = 0 ; j < randomPosition; ++j)
+			{
+				++iterInsertPos;
+			}
+
+			m_PlayerDataByTurn.insert(iterInsertPos, m_PlayerData[i]);
+		}
+	}
+	// 맵 생성
+	CreateMap();
+
+	// 맵에 랜덤으로 선, 아이템 뿌리기 (크기 반영)
+	InitRandomMap();
+}
+
+void CGameLogic::CreateMap()
+{
+	/*	실제로 게임에 사용되는 타일 외에도 울타리와 점을 표시하기 위한 칸도 필요
+	생성된 게임 주변은 기본값인 MO_SENTINEL로 두어서 IsClosed()와 같은 작업시 활용할 수 있도록 함 */
+	int targetRow, targetColumn;
+
+	MapSize mapSize;
+
+	// MapSelect에서 MapSize를 만들어 낸다
+	switch(m_SelectedMapSize)
+	{
+	case MS_6X5:
+		mapSize.m_Width = 6;
+		mapSize.m_Height = 5;
+		break;
+	case MS_8X7:
+		mapSize.m_Width = 8;
+		mapSize.m_Height = 7;
+		break;
+	default:
+		// 조심해!! 방어코드를 넣어야해!! 여기 들어오면 뭔가 잘못된거다
+		return;
+	}
+
+	for (targetRow = 1; targetRow <= mapSize.m_Height*2 + 1; ++targetRow)
+	{  		
+		for (targetColumn = 1; targetColumn <= mapSize.m_Width*2 + 1; ++targetColumn) 
+		{ 
+			if (targetRow % 2 == 1)
+			{
+				// dot - line - dot - line
+				if (targetColumn % 2 == 1)
+				{
+					m_Map[targetRow][targetColumn].m_Type = MO_DOT;
+				} 
+				else 
+				{
+					m_Map[targetRow][targetColumn].m_Type = MO_LINE_UNCONNECTED;
+				}
+			} 
+			else 
+			{
+				// line - tile - line - tile
+				if (targetColumn % 2 == 1)
+				{
+					m_Map[targetRow][targetColumn].m_Type = MO_LINE_UNCONNECTED;
+				} 
+				else 
+				{
+					m_Map[targetRow][targetColumn].m_Type = MO_TILE;
+				}
+			}
+		}
+	}
+
+	return;
+}
+
+void CGameLogic::InitRandomMap()
+{
+	// 울타리, 고기, 독약 갯수를 위한 변수들
+	int startLineNumber = 0;
+	int startGoldNumber = 0;
+	int startTrashNumber = 0;
+
+	switch (m_SelectedMapSize)
+	{
+	case MS_6X5: 
+		startLineNumber = 13;
+		startGoldNumber = 5;
+		startTrashNumber = 4;
+		break;
+	case MS_8X7:
+		startLineNumber = 27;
+		startGoldNumber = 8;
+		startTrashNumber = 7;
+		break;
+	default:
+		break;
+	}
+
+	// IsClosed에서 사용할 변수들입니다.
+	IndexedPosition RandomTargetPosition;
+
+	// 고정적인 시드값이 필요할 경우 아래 시드를 써보시기 바랍니다.
+	//srand(1383706550);
+
+	// 울타리를 뿌려주는 함수입니다.
+	while (startLineNumber)
+	{
+		// 울타리는 (2,1), (1,2) 부터 시작하므로
+		RandomTargetPosition.m_PosI = rand() % MAX_MAP_HEIGHT;
+		RandomTargetPosition.m_PosJ = rand() % MAX_MAP_WIDTH;
+
+		// 랜덤 값으로 뽑은 좌표가 MO_LINE_UNCONNECTED일 경우에
+		if ( GetMapType(RandomTargetPosition) == MO_LINE_UNCONNECTED )
+		{
+			// IsPossible을 만족하면
+			if ( IsPossible(RandomTargetPosition) )
+			{
+				// 일단 그립니다(IsClosed 검사를 위해서)
+				//printf("random %d , %d\n",RandomTargetPosition.m_PosI,RandomTargetPosition.m_PosJ);
+				DrawLine(RandomTargetPosition);
+				--startLineNumber;
+
+				// 지금 막 그려진 선이 IsClosed() 조건을 만족하지 않으면 그대로 종료
+				if ( IsClosed(RandomTargetPosition) )
+				{
+					// 만약 지금 막 그려진 선이 어떤 도형을 닫는다면 해당 선을 삭제하고 라인 카운터를 복구
+					DeleteLine(RandomTargetPosition);
+					++startLineNumber;
+				}
+			}
+		}
+
+	}
+
+	while (startGoldNumber)
+	{
+		RandomTargetPosition.m_PosI = rand() % MAX_MAP_HEIGHT + 2;
+		RandomTargetPosition.m_PosJ = rand() % MAX_MAP_WIDTH + 2;
+		if (GetMapType(RandomTargetPosition) == MO_TILE 
+			&& GetItem(RandomTargetPosition) == ITEM_NOTHING)
+		{
+			SetItem(RandomTargetPosition, ITEM_GOLD);
+			startGoldNumber--;
+		}
+	}
+
+	while (startTrashNumber)
+	{
+		RandomTargetPosition.m_PosI = rand() % MAX_MAP_HEIGHT + 2;
+		RandomTargetPosition.m_PosJ = rand() % MAX_MAP_WIDTH + 2;
+		if (GetMapType(RandomTargetPosition) == MO_TILE 
+			&& GetItem(RandomTargetPosition) == ITEM_NOTHING)
+		{
+			SetItem(RandomTargetPosition, ITEM_TRASH);
+			startTrashNumber--;
+		}
+	}
+
+	return;
+}
+
+void CGameLogic::DrawLine( const IndexedPosition& indexedPosition )
+{
+	// 범위를 벗어난 경우 예외 처리
+	assert(indexedPosition.m_PosI < MAX_MAP_WIDTH && indexedPosition.m_PosJ<MAX_MAP_HEIGHT) ;
+
+	m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type = MO_LINE_CONNECTED;
+
+	//animaiton start
+	m_LineAnimationFlag = true;
+	m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_AnimationFlag = true;
+}
+
+void CGameLogic::DeleteLine( const IndexedPosition& indexedPosition )
+{
+	// 범위를 벗어난 경우 예외 처리
+	assert(indexedPosition.m_PosI < MAX_MAP_WIDTH && indexedPosition.m_PosJ<MAX_MAP_HEIGHT) ;
+
+	//랜덤 라인 긋는 과정에서의 애니메이션 상태 변화 되돌리기
+	for (int tempI = 0 ; tempI < MAX_MAP_WIDTH; ++tempI)
+	{
+		for (int tempJ = 0 ; tempJ < MAX_MAP_HEIGHT; ++tempJ)
+		{
+			SetMapFlag(IndexedPosition(tempI, tempJ), false);
+
+			if (GetMapType(IndexedPosition(tempI, tempJ) ) == MO_TILE)
+			{
+				//애니메이션 재생을 위한 데이터도 초기화
+				InitAnimationState(IndexedPosition(tempI, tempJ) );
+			}
+		}
+	}
+
+	m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type = MO_LINE_UNCONNECTED;
+}
+
+void CGameLogic::SetItem( IndexedPosition indexedPosition, MO_ITEM item )
+{
+	assert(indexedPosition.m_PosI < MAX_MAP_WIDTH && indexedPosition.m_PosJ<MAX_MAP_HEIGHT) ;
+
+	m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Item = item;
 }

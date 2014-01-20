@@ -180,9 +180,9 @@ int CGameManager::GetPlayerIdByTurn( int currentTurn )
 void CGameManager::StartGame()
 {
 	if (m_IsOnlineGame)
-{
+	{
 
-}
+	}
 	else
 	{
 		CGameLogic::GetInstance()->StartGame();
