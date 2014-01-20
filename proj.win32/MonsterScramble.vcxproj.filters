@@ -96,9 +96,6 @@
     <ClCompile Include="..\Classes\SettingCharacterLayer.cpp">
       <Filter>Classes\Layer\GameSetting</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\PlayerNameSetting.cpp">
-      <Filter>Classes\Layer\GameSetting</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\SettingMapLayer.cpp">
       <Filter>Classes\Layer\GameSetting</Filter>
     </ClCompile>
@@ -122,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\HelpWindowLayer.cpp">
       <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayerNameSettingLayer.cpp">
+      <Filter>Classes\Layer\GameSetting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +173,6 @@
     <ClInclude Include="..\Classes\SettingCharacterLayer.h">
       <Filter>Classes\Layer\GameSetting</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\PlayerNameSetting.h">
-      <Filter>Classes\Layer\GameSetting</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\SettingMapLayer.h">
       <Filter>Classes\Layer\GameSetting</Filter>
     </ClInclude>
@@ -199,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HelpWindowLayer.h">
       <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayerNameSettingLayer.h">
+      <Filter>Classes\Layer\GameSetting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
