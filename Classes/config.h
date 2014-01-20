@@ -254,9 +254,9 @@ enum MO_OWNER	//게임 맵 각 타일 소유주
 
 enum MO_ITEM	//타일에 지정된 아이템
 {
-	MO_NOTHING,
-	MO_GOLD,
-	MO_TRASH
+	ITEM_NOTHING,
+	ITEM_GOLD,
+	ITEM_TRASH
 };
 
 enum Direction	//게임 맵 탐색 시 활용되는 방향
@@ -265,6 +265,13 @@ enum Direction	//게임 맵 탐색 시 활용되는 방향
 	DI_RIGHT,
 	DI_DOWN,
 	DI_LEFT
+};
+
+enum MapSelect
+{
+	MS_NOT_SELECTED,
+	MS_6X5,
+	MS_8X7
 };
 
 struct MapSize //맵 크기값을 위한 구조체입니다
@@ -284,7 +291,6 @@ struct Coordinate
 	int m_PosX;
 	int m_PosY;
 };
-
 
 /*	게임 맵의 타일 좌표를 표현하기 위한 구조체 */
 struct IndexedPosition
@@ -321,7 +327,7 @@ struct MapObject
 	MapObject () :
 		m_Type(MO_SENTINEL),
 		m_Owner(MO_NOBODY),
-		m_Item(MO_NOTHING),
+		m_Item(ITEM_NOTHING),
 		m_Flag(false),
 		m_AnimationFlag(false),
 		m_StartTime(0),

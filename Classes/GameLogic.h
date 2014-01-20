@@ -1,13 +1,12 @@
 #pragma once
 #include "cocos2d.h"
-#include "ccTypes.h"
 #include "config.h"
 #include <array>
 
 //플레이어 데이터
 struct PlayerData
 {
-	PlayerData() : m_PlayerId(-1),m_PlayerName("꿀호떡"),m_CharacterId(-1),m_PlayerTurn(-1),
+	PlayerData() : m_PlayerId(-1), m_PlayerName("꿀호떡"), m_CharacterId(-1),
 						m_MyTile(0), m_MyGold(0), m_MyTrash(0), m_MyTotalScore(0) {}
 
 	//플레이어의 고유 아이디 ( 온라인 모드일 시 clientID를 의미 )
@@ -55,32 +54,34 @@ public:
 	bool init();
 
 	//이 함수는 필요 없을 것 같음. m_PlayerId = playerIdx 이므로 이미 알고 있는 정보를 다시 요청하는 것 같음
-	int GetPlayerId(int playerIdx) {return m_PlayerData[playerIdx].m_PlayerId; }
+	int GetPlayerId(int playerIdx) { return m_PlayerData[playerIdx]->m_PlayerId; }
+
+	int GetPlayerTurnById(int playerId) { return m_PlayerData[playerId]->m_PlayerTurn; }
 
 	//캐릭터를 플레이어에게 짝지어 준다.
-	void SetPlayerCharacterId(int playerId, int characterId);
+	void SetPlayerCharacterId(int characterId);
 	bool isCharacterSelected(int characterId) {return m_Character[characterId].m_isCharacterSelected;}
-	int   GetPlayerCharacterId(int playerId) { return m_PlayerData[playerId].m_CharacterId;}
+	int   GetPlayerCharacterId(int playerId) { return m_PlayerData[playerId]->m_CharacterId;}
 
 	void   SetPlayerName(int playerId, const std::string& playerName);
-	const std::string& GetPlayerName(int playerId)				{ return m_PlayerData[playerId].m_PlayerName; }
+	const std::string& GetPlayerName(int playerId)				{ return m_PlayerData[playerId]->m_PlayerName; }
 	
-	const std::string& GetPlayerSettingImage(int playerId)		{ return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterSettingImage; }
-	const std::string& GetPlayerPlayImage(int playerId)			{ return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterPlayImage; } 
-	const std::string& GetPlayerResultImage(int playerId)		{ return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterResultImage; }
-	const cocos2d::ccColor4B& GetPlayerColor(int playerId)		{ return m_Character[m_PlayerData[playerId].m_CharacterId].m_CharacterColor; }
+	const std::string& GetPlayerSettingImage(int playerId)		{ return m_Character[m_PlayerData[playerId]->m_CharacterId].m_CharacterSettingImage; }
+	const std::string& GetPlayerPlayImage(int playerId)			{ return m_Character[m_PlayerData[playerId]->m_CharacterId].m_CharacterPlayImage; } 
+	const std::string& GetPlayerResultImage(int playerId)		{ return m_Character[m_PlayerData[playerId]->m_CharacterId].m_CharacterResultImage; }
+	const cocos2d::ccColor4B& GetPlayerColor(int playerId)		{ return m_Character[m_PlayerData[playerId]->m_CharacterId].m_CharacterColor; }
 
-	void SetPlayerTurn(int playerId, int turn)					{ m_PlayerData[playerId].m_PlayerTurn = turn; }
-	int GetPlayerTurn(int palyerId)								{ return m_PlayerData[palyerId].m_PlayerTurn; }
-
-	void		SetMapSize(int x, int y);
-	MapSize		GetMapSize() {return m_MapSize;}
+	void			SetSelectedMapSize( MapSelect mapSize );
+	MapSelect		GetSelectedMapSize() { return m_SelectedMapSize; }
 
 	void		SetPlayerNumber(int playerNumber)			{m_PlayerNumber = playerNumber;}
 	int			GetplayerNumber()							{return m_PlayerNumber; }
 
 	bool IsPossible(IndexedPosition indexedPosition);
 	bool IsClosed(IndexedPosition indexedPosition);
+
+	/*	Setting Scene 관련에서 게임 시작까지	*/
+	void StartGame();
 
 	/*	주어진 index의 울타리 주변 타일을 확인 합니다 */
 	void CollectClosedTile(IndexedPosition indexedPosition, Direction direction);
@@ -91,8 +92,8 @@ public:
 	void		UpdatePlayerResult(int playerId, MO_ITEM item);
 	int			GetPlayerResult(int playerId, MO_ITEM item);
 
-	void		UpdatePlayerScore(int playerId, int score)	{ m_PlayerData[playerId].m_MyTotalScore += score; }
-	int			GetPlayerTotalScore(int playerId)			{return m_PlayerData[playerId].m_MyTotalScore; }
+	void		UpdatePlayerScore(int playerId, int score)	{ m_PlayerData[playerId]->m_MyTotalScore += score; }
+	int			GetPlayerTotalScore(int playerId)			{ return m_PlayerData[playerId]->m_MyTotalScore; }
 
 	int			GetWinnerIdx();
 
@@ -110,15 +111,16 @@ public:
 private:
 	static CGameLogic*	m_pInstance; //singleton instance
 
-	MapSize				m_MapSize;
+	MapSelect				m_SelectedMapSize;
 	int						m_PlayerNumber;
 	int						m_CurrentTurn;
 
-	std::array<PlayerData, MAX_PLAYER_NUM> m_PlayerData;
+	// 플레이어 데이터를 가지고 있는 구조체
+	std::array<PlayerData*, MAX_PLAYER_NUM> m_PlayerData;
 	std::array<Character, CHARACTER_NUM> m_Character;
 
-	//플레이 순서에 매칭되는 플레이어의 ID
-	std::array<int, MAX_PLAYER_NUM> m_PlayerIdByTurn;
+	//플레이 순서에 매칭되는 PlayerData의 포인터
+	std::list<PlayerData*> m_PlayerDataByTurn;
 
 	/*	맵 관련 변수들 */
 

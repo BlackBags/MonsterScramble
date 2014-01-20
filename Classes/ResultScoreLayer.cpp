@@ -77,7 +77,7 @@ bool CResultScoreLayer::init()
 		pTileMultiply->setAnchorPoint(ccp(0.0, 0.0) );
 		this->addChild(pTileMultiply, 0);
 
-		std::string tileCount = std::to_string(CGameManager::GetInstance()->GetElementCount(i, MO_NOTHING) );
+		std::string tileCount = std::to_string(CGameManager::GetInstance()->GetElementCount(i, ITEM_NOTHING) );
 
 		CCLabelTTF* pTileCount = CCLabelTTF::create(tileCount.c_str(), "arial", 34 );
 		horizontalPos += pTileMultiply->getContentSize().width;
@@ -98,7 +98,7 @@ bool CResultScoreLayer::init()
 		pGoldMultiply->setAnchorPoint(ccp(0.0, 0.0) );
 		this->addChild(pGoldMultiply, 0);
 
-		std::string goldCount = std::to_string(CGameManager::GetInstance()->GetElementCount(i, MO_GOLD) );
+		std::string goldCount = std::to_string(CGameManager::GetInstance()->GetElementCount(i, ITEM_GOLD) );
 
 		CCLabelTTF* pGoldCount = CCLabelTTF::create(goldCount.c_str(), "arial", 34 );
 		horizontalPos += pGoldMultiply->getContentSize().width;
@@ -119,7 +119,7 @@ bool CResultScoreLayer::init()
 		pTrashMultiply->setAnchorPoint(ccp(0.0, 0.0) );
 		this->addChild(pTrashMultiply, 0);
 
-		std::string trashCount = std::to_string(CGameManager::GetInstance()->GetElementCount(i, MO_TRASH) );
+		std::string trashCount = std::to_string(CGameManager::GetInstance()->GetElementCount(i, ITEM_TRASH) );
 
 		CCLabelTTF* pTrashCount = CCLabelTTF::create(trashCount.c_str(), "arial", 34 );
 		horizontalPos += pTrashMultiply->getContentSize().width;

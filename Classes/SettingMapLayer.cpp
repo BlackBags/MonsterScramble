@@ -1,4 +1,5 @@
 #include "SettingMapLayer.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 
@@ -32,8 +33,8 @@ bool CSettingMapLayer::init()
 		);
 
 	// set Tag
-	pMapSelect1->setTag(0);
-	pMapSelect2->setTag(1);
+	pMapSelect1->setTag( MS_6X5 );
+	pMapSelect2->setTag( MS_8X7 );
 
 	// add child
 	MapSelectTable->addChild(pMapSelect1);
@@ -53,7 +54,9 @@ void CSettingMapLayer::SelectMapCallBack( CCObject* pSender )
 	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
 #else
 	// 어떤 버튼이 클릭되었는지를 알아본다.
-	int selectedCharacterId = static_cast<CCMenuItem*>(pSender)->getTag();
+	int selectedMapId = static_cast<CCMenuItem*>(pSender)->getTag();
+
+	CGameManager::GetInstance()->SetMapSize( static_cast<MapSelect>(selectedMapId) );
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	exit(0);

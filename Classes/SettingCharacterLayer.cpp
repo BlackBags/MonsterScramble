@@ -10,9 +10,6 @@ bool CSettingCharacterLayer::init()
 		return false;
 	}
 
-	// 멤버변수 초기화
-	m_TempPlayerNumber = 0;
-
 	// Get Window Size
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize(); 
 
@@ -85,11 +82,8 @@ void CSettingCharacterLayer::SelectCharacterCallBack(CCObject* pSender)
 	// 어떤 버튼이 클릭되었는지를 알아본다.
 	int selectedCharacterId = static_cast<CCMenuItem*>(pSender)->getTag();
 
-	CGameManager::GetInstance()->SelectCharacter(m_TempPlayerNumber, selectedCharacterId);
+	CGameManager::GetInstance()->SelectCharacter(selectedCharacterId);
 	
-	// 추가 선택을 대비하여 1 증가시킨다. 실제 데이터에 반영되는 것은 m_TempPlayerNumber 최종 상태보다 항상 1 작다.
-	++m_TempPlayerNumber;
-
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	exit(0);
 #endif

@@ -7,7 +7,10 @@ CGameLogic* CGameLogic::m_pInstance = nullptr;
 
 CGameLogic::CGameLogic(void)
 {
-
+	for (int i = 0; i < MAX_PLAYER_NUM; ++i)
+	{
+		m_PlayerData[i] = nullptr;
+	}
 }
 
 
@@ -31,6 +34,20 @@ void CGameLogic::ReleaseInstance()
 
 bool CGameLogic::init()
 {
+	m_SelectedMapSize = MS_NOT_SELECTED;
+
+	// PlayerData를 만들어서 할당
+	for (int i = 0; i < MAX_PLAYER_NUM; ++i)
+	{
+		if ( m_PlayerData[i] != nullptr )
+		{
+			delete m_PlayerData[i];
+			m_PlayerData[i] = nullptr;
+		}
+
+		m_PlayerData[i] = new PlayerData();
+	}
+
 	//캐릭터 관련 자료를 넣어준다.
 	for (int i = 0; i<CHARACTER_NUM; ++i)
 	{
@@ -75,23 +92,22 @@ bool CGameLogic::init()
 	return true;
 }
 
-void CGameLogic::SetMapSize( int x, int y )
+void CGameLogic::SetSelectedMapSize( MapSelect mapSize )
 {
-	m_MapSize.m_Height = y;
-	m_MapSize.m_Width = x;
+	m_SelectedMapSize = mapSize;
 }
 
 void CGameLogic::UpdatePlayerResult( int playerId, MO_ITEM item )
 {
-	++m_PlayerData[playerId].m_MyTile;
+	++m_PlayerData[playerId]->m_MyTile;
 
 	switch (item)
 	{
-	case MO_GOLD:
-		++m_PlayerData[playerId].m_MyGold;
+	case ITEM_GOLD:
+		++m_PlayerData[playerId]->m_MyGold;
 		break;
-	case MO_TRASH:
-		++m_PlayerData[playerId].m_MyTrash;
+	case ITEM_TRASH:
+		++m_PlayerData[playerId]->m_MyTrash;
 		break;
 	default:
 		break;
@@ -102,14 +118,14 @@ int CGameLogic::GetPlayerResult(int playerId, MO_ITEM item)
 {
 	switch (item)
 	{
-	case MO_NOTHING:
-		return m_PlayerData[playerId].m_MyTile;
+	case ITEM_NOTHING:
+		return m_PlayerData[playerId]->m_MyTile;
 		break;
-	case MO_GOLD:
-		return m_PlayerData[playerId].m_MyGold;
+	case ITEM_GOLD:
+		return m_PlayerData[playerId]->m_MyGold;
 		break;
-	case MO_TRASH:
-		return m_PlayerData[playerId].m_MyTrash;
+	case ITEM_TRASH:
+		return m_PlayerData[playerId]->m_MyTrash;
 		break;
 	default:
 		break;
@@ -384,16 +400,51 @@ void CGameLogic::SetMapFlag( IndexedPosition indexedPosition,bool flag )
 
 void CGameLogic::SetPlayerName(int playerId,  const std::string& playerName )
 {
-	m_PlayerData[playerId].m_PlayerName = playerName;
+	m_PlayerData[playerId]->m_PlayerName = playerName;
 }
 
-void CGameLogic::SetPlayerCharacterId( int playerId, int characterId )
+void CGameLogic::SetPlayerCharacterId( int characterId )
 {
-	//이미 선택했던 캐릭터가 있다면 이전 캐릭터는 풀어준다.
-	if (m_PlayerData[playerId].m_CharacterId != -1)
+	// IsCharacterSelected 검사를 해서 선택되어 있으면 못 하게
+// 	if ( isCharacterSelected(characterId) )
+// 	{
+// 		return;
+// 	}
+
+	// Single 일 때
+	// 이미 선택된 캐릭터인지 확인해서 선택되어 있다면 취소시키고 리턴
+	for (int i = 0; i < MAX_PLAYER_NUM; ++i)
 	{
-		m_Character[m_PlayerData[playerId].m_CharacterId].m_isCharacterSelected = false;
+		if ( m_PlayerData[i]->m_CharacterId == characterId 
+			&& m_PlayerData[i]->m_PlayerId != -1 )
+		{
+			m_PlayerData[i]->m_CharacterId = -1;
+			m_PlayerData[i]->m_PlayerId = -1;
+
+			return;
+		}
 	}
-	m_PlayerData[playerId].m_CharacterId = characterId; 
-	m_Character[characterId].m_isCharacterSelected = true;
+
+	// 아직 선택되지 않은 캐릭터라면 추가해준다
+	for (int i = 0; i < MAX_PLAYER_NUM; ++i)
+	{
+		if (m_PlayerData[i]->m_PlayerId == -1)
+		{
+			m_PlayerData[i]->m_PlayerId = i;
+			m_PlayerData[i]->m_CharacterId = characterId;
+		}
+	}
+
+	// 이 밑의 코드는 안 쓴다!
+	//이미 선택했던 캐릭터가 있다면 이전 캐릭터는 풀어준다.
+// 	if (m_PlayerData[playerId]->m_CharacterId != -1)
+// 	{
+// 		m_Character[m_PlayerData[playerId]->m_CharacterId].m_isCharacterSelected = false;
+// 	}
+// 	m_PlayerData[playerId]->m_CharacterId = characterId;
+}
+
+void CGameLogic::StartGame()
+{
+
 }

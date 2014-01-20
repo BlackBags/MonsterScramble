@@ -132,7 +132,7 @@ const std::string& CGameManager::GetCharacterResultFaceFileName(int playerIdx)
 	}
 }
 
-void CGameManager::SelectCharacter( int playerId, int characterId )
+void CGameManager::SelectCharacter( int characterId )
 {
 	if (m_IsOnlineGame)
 	{
@@ -141,7 +141,7 @@ void CGameManager::SelectCharacter( int playerId, int characterId )
 	}
 	else
 	{
-		CGameLogic::GetInstance()->SetPlayerCharacterId(playerId,characterId);
+		CGameLogic::GetInstance()->SetPlayerCharacterId( characterId );
 	}
 }
 
@@ -171,73 +171,33 @@ int CGameManager::GetCharacterId( int playerId )
 	}
 }
 
-void CGameManager::SetRandomPlayerTurn()
-{
-
-}
-
 int CGameManager::GetPlayerIdByTurn( int currentTurn )
 {
+	// 조심해!!
+	return 0;
+}
+
+void CGameManager::StartGame()
+{
 	if (m_IsOnlineGame)
-	{
-		//온라인
-		return -1;
-	}
+{
+
+}
 	else
 	{
-		return CGameLogic::GetInstance()->GetPlayerTurn(currentTurn);
+		CGameLogic::GetInstance()->StartGame();
 	}
 }
 
-void CGameManager::UpdateGameMap()
+void CGameManager::SetMapSize( MapSelect mapSize )
 {
 	if (m_IsOnlineGame)
 	{
-		//온라인
-		return;
-	}
-	else
-	{
-		return;
-	}
-}
 
-bool CGameManager::isEnd()
-{
-	if (m_IsOnlineGame)
-	{
-		//온라인
-		return false;
 	}
 	else
 	{
-		return CGameLogic::GetInstance()->IsEnd();
-	}
-}
-
-bool CGameManager::isPossible(IndexedPosition indexedPosition)
-{
-	if (m_IsOnlineGame)
-	{
-		//온라인
-		return false;
-	}
-	else
-	{
-		return CGameLogic::GetInstance()->IsPossible(indexedPosition);
-	}
-}
-
-bool CGameManager::isClosed(IndexedPosition indexedPosition)
-{
-	if (m_IsOnlineGame)
-	{
-		//온라인
-		return false;
-	}
-	else
-	{
-		return CGameLogic::GetInstance()->IsClosed(indexedPosition);
+		CGameLogic::GetInstance()->SetSelectedMapSize( mapSize );
 	}
 }
 
