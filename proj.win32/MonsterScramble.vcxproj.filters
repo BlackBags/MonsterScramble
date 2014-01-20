@@ -43,6 +43,12 @@
     <Filter Include="Classes\Layer\GameSetting">
       <UniqueIdentifier>{91f68ffc-89aa-44d1-a329-95979b178de5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scene\PlayScene">
+      <UniqueIdentifier>{8877ceed-dc9b-4cf0-8ad2-45ed58f6df2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Layer\Play">
+      <UniqueIdentifier>{cde6cbf5-0d45-4d72-9953-7937198da078}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,6 +101,27 @@
     </ClCompile>
     <ClCompile Include="..\Classes\SettingMapLayer.cpp">
       <Filter>Classes\Layer\GameSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayScene.cpp">
+      <Filter>Classes\Scene\PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TimerLayer.cpp">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayerLayer.cpp">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameBoardLayer.cpp">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameEndLayer.cpp">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelpButtonLayer.cpp">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelpWindowLayer.cpp">
+      <Filter>Classes\Layer\Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +178,27 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SettingMapLayer.h">
       <Filter>Classes\Layer\GameSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayScene.h">
+      <Filter>Classes\Scene\PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TimerLayer.h">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayerLayer.h">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameBoardLayer.h">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameEndLayer.h">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelpButtonLayer.h">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelpWindowLayer.h">
+      <Filter>Classes\Layer\Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
