@@ -606,7 +606,7 @@ void CGameLogic::InitRandomMap()
 
 	}
 
-	while (startGoldNumber)
+	while (startGoldNumber != 0)
 	{
 		RandomTargetPosition.m_PosI = rand() % MAX_MAP_HEIGHT;
 		RandomTargetPosition.m_PosJ = rand() % MAX_MAP_WIDTH;
@@ -618,7 +618,7 @@ void CGameLogic::InitRandomMap()
 		}
 	}
 
-	while (startTrashNumber)
+	while (startTrashNumber != 0)
 	{
 		RandomTargetPosition.m_PosI = rand() % MAX_MAP_HEIGHT;
 		RandomTargetPosition.m_PosJ = rand() % MAX_MAP_WIDTH;
@@ -636,7 +636,7 @@ void CGameLogic::InitRandomMap()
 void CGameLogic::DrawLine( const IndexedPosition& indexedPosition )
 {
 	// 범위를 벗어난 경우 예외 처리
-	assert(indexedPosition.m_PosI < MAX_MAP_WIDTH && indexedPosition.m_PosJ<MAX_MAP_HEIGHT) ;
+	assert(indexedPosition.m_PosI < MAX_MAP_WIDTH && indexedPosition.m_PosJ < MAX_MAP_HEIGHT) ;
 
 	m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type = MO_LINE_CONNECTED;
 
@@ -648,7 +648,7 @@ void CGameLogic::DrawLine( const IndexedPosition& indexedPosition )
 void CGameLogic::DeleteLine( const IndexedPosition& indexedPosition )
 {
 	// 범위를 벗어난 경우 예외 처리
-	assert(indexedPosition.m_PosI < MAX_MAP_WIDTH && indexedPosition.m_PosJ<MAX_MAP_HEIGHT) ;
+	assert(indexedPosition.m_PosI < MAX_MAP_WIDTH && indexedPosition.m_PosJ < MAX_MAP_HEIGHT) ;
 
 	//랜덤 라인 긋는 과정에서의 애니메이션 상태 변화 되돌리기
 	for (int tempI = 0 ; tempI < MAX_MAP_WIDTH; ++tempI)
@@ -670,7 +670,7 @@ void CGameLogic::DeleteLine( const IndexedPosition& indexedPosition )
 
 void CGameLogic::SetItem( IndexedPosition indexedPosition, MO_ITEM item )
 {
-	assert(indexedPosition.m_PosI < MAX_MAP_WIDTH && indexedPosition.m_PosJ<MAX_MAP_HEIGHT) ;
+	assert(indexedPosition.m_PosI < MAX_MAP_WIDTH && indexedPosition.m_PosJ < MAX_MAP_HEIGHT) ;
 
 	m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Item = item;
 }
