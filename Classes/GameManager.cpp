@@ -37,7 +37,8 @@ void CGameManager::SetPlayerName(int playerId,  const std::string& playerName )
 {
 	if (m_IsOnlineGame)
 	{
-
+		//온라인인 경우
+		return;
 	}
 	else
 	{
@@ -135,7 +136,8 @@ void CGameManager::SelectCharacter( int playerId, int characterId )
 {
 	if (m_IsOnlineGame)
 	{
-
+		//온라인
+		return;
 	}
 	else
 	{
@@ -147,7 +149,8 @@ bool CGameManager::isCharacterSelected( int characterId )
 {
 	if (m_IsOnlineGame)
 	{
-
+		//온라인
+		return false;
 	}
 	else
 	{
@@ -159,7 +162,8 @@ int CGameManager::GetCharacterId( int playerId )
 {
 	if (m_IsOnlineGame)
 	{
-
+		//온라인
+		return -1;
 	}
 	else
 	{
@@ -174,6 +178,66 @@ void CGameManager::SetRandomPlayerTurn()
 
 int CGameManager::GetPlayerIdByTurn( int currentTurn )
 {
-	// 조심해!!
-	return 0;
+	if (m_IsOnlineGame)
+	{
+		//온라인
+		return -1;
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->GetPlayerTurn(currentTurn);
+	}
 }
+
+void CGameManager::UpdateGameMap()
+{
+	if (m_IsOnlineGame)
+	{
+		//온라인
+		return;
+	}
+	else
+	{
+		return;
+	}
+}
+
+bool CGameManager::isEnd()
+{
+	if (m_IsOnlineGame)
+	{
+		//온라인
+		return false;
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->IsEnd();
+	}
+}
+
+bool CGameManager::isPossible(IndexedPosition indexedPosition)
+{
+	if (m_IsOnlineGame)
+	{
+		//온라인
+		return false;
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->IsPossible(indexedPosition);
+	}
+}
+
+bool CGameManager::isClosed(IndexedPosition indexedPosition)
+{
+	if (m_IsOnlineGame)
+	{
+		//온라인
+		return false;
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->IsClosed(indexedPosition);
+	}
+}
+

@@ -28,13 +28,14 @@ public:
 	int	  GetCharacterId(int playerId);
 
 	void SetRandomPlayerTurn();
+	// 현재 턴에 해당하는 플레이어 'ID'를 반환한다.
 	int  GetPlayerIdByTurn(int currentTurn);
 	
 	/* 게임 진행 관련 : 실시간 점수 계산은 로직 쪽에서 하도록 한다.*/
 	void UpdateGameMap();
 	bool isEnd();
-	bool isPossible();
-	bool isClosed();
+	bool isPossible(IndexedPosition indexedPosition);
+	bool isClosed(IndexedPosition indexedPosition);
 	
 
 	//result scene 관련
