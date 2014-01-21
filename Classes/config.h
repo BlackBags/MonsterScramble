@@ -115,6 +115,8 @@ const DWORD SC_P_TILE_ANIMATION_TIME = 500;
 const int MAX_MAP_WIDTH = 23;
 const int MAX_MAP_HEIGHT = 23;
 
+/* 게임 맵 오브젝트의 종류 입니다 */
+const int MO_TYPE_NUMBER = 6;
 
 /*	지도 초기화 할 때 맵 탐사하는 배열 길이 (함수 구조 변경 후 삭제 예정) */
 const int CHECKLIST_LENGTH = 100;

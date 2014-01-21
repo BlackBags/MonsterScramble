@@ -53,6 +53,7 @@ bool CPlayScene::init(void)
 void CPlayScene::update(float dt)
 {
 	//dt는 이전 update 이후 지난 시간
+
 	
 	//여기에 각 레이어들을 업데이트하는 코드를 넣음
 	//각 레이어별로 업데이트 함수 만들어야 함

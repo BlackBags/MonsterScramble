@@ -123,6 +123,9 @@
     <ClCompile Include="..\Classes\PlayerNameSettingLayer.cpp">
       <Filter>Classes\Layer\GameSetting</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MapObject.cpp">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\PlayerNameSettingLayer.h">
       <Filter>Classes\Layer\GameSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapObject.h">
+      <Filter>Classes\Layer\Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
