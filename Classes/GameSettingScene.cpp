@@ -3,6 +3,7 @@
 #include "GameSettingScene.h"
 #include "SettingTitleLayer.h"
 #include "SettingCharacterLayer.h"
+#include "StartAndHelpButtonLayer.h"
 #include "GameManager.h"
 
 USING_NS_CC;
@@ -34,6 +35,10 @@ bool CGameSettingScene::init(void)
 	// map select table layer
 	SettingMaplayer = CSettingMapLayer::create();
 	this->addChild(SettingMaplayer, 1);
+
+	// StartButton and HelpButton layer
+	CStartAndHelpButtonLayer* StartAndHelpButtonLayer = CStartAndHelpButtonLayer::create();
+	this->addChild(StartAndHelpButtonLayer, 1);
 
 	this->scheduleUpdate();
 

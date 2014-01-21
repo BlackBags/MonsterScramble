@@ -49,6 +49,12 @@
     <Filter Include="Classes\Layer\Play">
       <UniqueIdentifier>{cde6cbf5-0d45-4d72-9953-7937198da078}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scene\HelpScene">
+      <UniqueIdentifier>{e02ce843-4eee-44a1-a0e6-9d703b2c7f03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Layer\Help">
+      <UniqueIdentifier>{cfd165ea-a4f3-4b14-9269-c92cb9704d49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -125,6 +131,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MapObject.cpp">
       <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelpScene.cpp">
+      <Filter>Classes\Scene\HelpScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelpTutorialLayer.cpp">
+      <Filter>Classes\Layer\Help</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StartAndHelpButtonLayer.cpp">
+      <Filter>Classes\Layer\GameSetting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +220,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MapObject.h">
       <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelpScene.h">
+      <Filter>Classes\Scene\HelpScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelpTutorialLayer.h">
+      <Filter>Classes\Layer\Help</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StartAndHelpButtonLayer.h">
+      <Filter>Classes\Layer\GameSetting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

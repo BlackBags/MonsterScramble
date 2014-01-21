@@ -7,8 +7,5 @@ public:
 	virtual bool init();
 
 	CREATE_FUNC(CSettingTitleLayer);
-
-private:
-	void StartButtonCallBack(CCObject* pSender);
 };
 
