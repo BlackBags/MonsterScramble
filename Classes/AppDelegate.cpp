@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 #include "MainScene.h"
+#include "config.h"
 
 USING_NS_CC;
 
@@ -14,10 +15,12 @@ AppDelegate::~AppDelegate()
 
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
-    CCDirector* pDirector = CCDirector::sharedDirector();
-    CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
+	CCDirector* pDirector = CCDirector::sharedDirector();
+	pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
 
-    pDirector->setOpenGLView(pEGLView);
+	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+	CCEGLView::sharedOpenGLView()->setFrameSize(winSize.width,winSize.height);
+	CCEGLView::sharedOpenGLView()->setDesignResolutionSize(WINDOW_WIDTH,WINDOW_HEIGHT,kResolutionShowAll);
 	
     // turn on display FPS
     pDirector->setDisplayStats(true);
@@ -27,7 +30,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
 	CCScene *pScene = CMainScene::create();
-	//CCScene *pScene = HelloWorld::scene();
 
     // run
     pDirector->runWithScene(pScene);
