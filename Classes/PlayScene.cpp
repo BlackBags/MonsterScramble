@@ -41,5 +41,19 @@ bool CPlayScene::init(void)
 	CCLayer* helpWindow = CHelpWindowLayer::create();
 	this->addChild(helpWindow, 2);
 
+	//매프레임마다 update함수 호출하도록 설정
+	//this->schedule(schedule_selector(CPlayScene::update) );
+
+	//이렇게 설정하면 update함수가 알아서 프레임마다 호출된다.
+	this->scheduleUpdate();
+
 	return true;
+}
+
+void CPlayScene::update(float dt)
+{
+	//dt는 이전 update 이후 지난 시간
+	
+	//여기에 각 레이어들을 업데이트하는 코드를 넣음
+	//각 레이어별로 업데이트 함수 만들어야 함
 }
