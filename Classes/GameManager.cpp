@@ -6,6 +6,7 @@ CGameManager* CGameManager::m_pInstance = nullptr;
 CGameManager::CGameManager(void)
 {
 	m_IsOnlineGame = false;
+	m_IsUpdated = false;
 }
 
 CGameManager::~CGameManager(void)
@@ -28,6 +29,7 @@ void CGameManager::ReleaseInstance()
 
 bool CGameManager::init()
 {
+	CGameLogic::GetInstance()->init();
 
 	return true;
 }
@@ -42,7 +44,7 @@ void CGameManager::SetPlayerName(int playerId,  const std::string& playerName )
 	}
 	else
 	{
-		CGameLogic::GetInstance()->SetPlayerName(playerId,playerName);
+		SetUpdateFlag(CGameLogic::GetInstance()->SetPlayerName(playerId,playerName) );
 	}
 }
 
@@ -71,6 +73,8 @@ int CGameManager::GetPlayerNumber()
 	}
 }
 
+//조심해!!
+//이거 호출하는 함수 아닌 것 같은데
 void CGameManager::SetPlayerNumber(int PlayerNumber)
 {
 	if (m_IsOnlineGame)
@@ -79,7 +83,7 @@ void CGameManager::SetPlayerNumber(int PlayerNumber)
 	}
 	else
 	{
-		CGameLogic::GetInstance()->SetPlayerNumber(PlayerNumber);
+		SetUpdateFlag(CGameLogic::GetInstance()->SetPlayerNumber(PlayerNumber) );
 	}
 }
 
@@ -141,7 +145,7 @@ void CGameManager::SelectCharacter( int characterId )
 	}
 	else
 	{
-		CGameLogic::GetInstance()->SetPlayerCharacterId( characterId );
+		SetUpdateFlag(CGameLogic::GetInstance()->SetPlayerCharacterId( characterId ) );
 	}
 }
 
@@ -185,7 +189,7 @@ void CGameManager::StartGame()
 	}
 	else
 	{
-		CGameLogic::GetInstance()->StartGame();
+		SetUpdateFlag(CGameLogic::GetInstance()->StartGame() );
 	}
 }
 
@@ -197,7 +201,30 @@ void CGameManager::SetMapSize( MapSelect mapSize )
 	}
 	else
 	{
-		CGameLogic::GetInstance()->SetSelectedMapSize( mapSize );
+		SetUpdateFlag(CGameLogic::GetInstance()->SetSelectedMapSize( mapSize ) );
 	}
 }
 
+bool CGameManager::IsEnd()
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->IsEnd();
+	}
+}
+
+MapSelect	CGameManager::GetSelectedMapSize()
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->GetSelectedMapSize();
+	}
+}

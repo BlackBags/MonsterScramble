@@ -2,6 +2,7 @@
 #include "BackgroundLayer.h"
 #include "MainTitleLayer.h"
 #include "MainMenuLayer.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 
@@ -27,6 +28,8 @@ bool CMainScene::init(void)
 	CCLayer* mainMenuLayer = CMainMenuLayer::create();
 
 	this->addChild(mainMenuLayer, 1);
+
+	CGameManager::GetInstance()->init();
 
 	return true;
 }

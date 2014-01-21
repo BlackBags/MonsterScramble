@@ -18,14 +18,14 @@ bool CSettingMapLayer::init()
 	CCMenu *MapSelectTable = CCMenu::createWithItems(NULL, NULL);
 
 	// make Image Buttons
-	CCMenuItemImage *pMapSelect1 = CCMenuItemImage::create(
+	pMapSelect1 = CCMenuItemImage::create(
 		"image/SETTING_5x5.png",
 		"image/SETTING_5x5_selected.png",
 		this,
 		menu_selector(CSettingMapLayer::SelectMapCallBack)
 		);
 
-	CCMenuItemImage *pMapSelect2 = CCMenuItemImage::create(
+	pMapSelect2 = CCMenuItemImage::create(
 		"image/SETTING_8x7.png",
 		"image/SETTING_8x7_selected.png",
 		this,
@@ -46,6 +46,13 @@ bool CSettingMapLayer::init()
 
 	// add menu to this class
 	this->addChild(MapSelectTable);
+
+	//checkÇ¥½Ã
+	pCheck = CCSprite::create("image/SETTING_check.png");
+	// Title Position : X Center + Y
+	pCheck->setPosition(ccp(0, 0) );
+	pCheck->setVisible(false);
+	this->addChild(pCheck, 0);
 }
 
 void CSettingMapLayer::SelectMapCallBack( CCObject* pSender )
@@ -62,4 +69,26 @@ void CSettingMapLayer::SelectMapCallBack( CCObject* pSender )
 	exit(0);
 #endif
 #endif
+}
+
+void CSettingMapLayer::update(void)
+{
+	float tempX, tempY;
+
+	switch(CGameManager::GetInstance()->GetSelectedMapSize() )
+	{
+	case MS_NOT_SELECTED:
+		pCheck->setVisible(false);
+		break;
+	case MS_6X5:
+		tempX = pMapSelect1->getPositionX() + WINDOW_WIDTH/2;
+		tempY = pMapSelect1->getPositionY();
+		pCheck->setPosition(ccp(tempX, tempY) );
+		pCheck->setVisible(true);
+		break;
+	case MS_8X7:
+		pCheck->setPosition(pMapSelect2->getPosition() );
+		pCheck->setVisible(true);
+		break;
+	}
 }

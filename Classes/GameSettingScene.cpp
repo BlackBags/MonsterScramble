@@ -3,7 +3,7 @@
 #include "GameSettingScene.h"
 #include "SettingTitleLayer.h"
 #include "SettingCharacterLayer.h"
-#include "SettingMapLayer.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 
@@ -32,8 +32,25 @@ bool CGameSettingScene::init(void)
 	this->addChild(SettingCharacterLayer, 1);
 
 	// map select table layer
-	CSettingMapLayer* SettingMaplayer = CSettingMapLayer::create();
+	SettingMaplayer = CSettingMapLayer::create();
 	this->addChild(SettingMaplayer, 1);
 
+	this->scheduleUpdate();
+
 	return true;
+}
+
+void CGameSettingScene::update(float dt)
+{
+	//dt는 이전 update 이후 지난 시간
+
+	if (CGameManager::GetInstance()->IsUpdated() )
+	{
+		//여기에 각 레이어들을 업데이트하는 코드를 넣음
+		//각 레이어별로 업데이트 함수 만들어야 함
+		SettingMaplayer->update();
+
+		//업데이트된 내용을 모두 받아와서 갱신했으므로 flag는 원래대로 false로 만든다
+		CGameManager::GetInstance()->SetUpdateFlag(false);
+	}
 }

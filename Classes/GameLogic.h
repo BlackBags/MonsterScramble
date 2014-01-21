@@ -53,17 +53,18 @@ public:
 
 	bool init();
 
+	//조심해!!
 	//이 함수는 필요 없을 것 같음. m_PlayerId = playerIdx 이므로 이미 알고 있는 정보를 다시 요청하는 것 같음
 	int GetPlayerId(int playerIdx) { return m_PlayerData[playerIdx]->m_PlayerId; }
 
 	int GetPlayerTurnById(int playerId) { return m_PlayerData[playerId]->m_PlayerTurn; }
 
 	//캐릭터를 플레이어에게 짝지어 준다.
-	void SetPlayerCharacterId(int characterId);
+	bool SetPlayerCharacterId(int characterId);
 	bool isCharacterSelected(int characterId) {return m_Character[characterId].m_isCharacterSelected;}
 	int   GetPlayerCharacterId(int playerId) { return m_PlayerData[playerId]->m_CharacterId;}
 
-	void   SetPlayerName(int playerId, const std::string& playerName);
+	bool   SetPlayerName(int playerId, const std::string& playerName);
 	const std::string& GetPlayerName(int playerId)				{ return m_PlayerData[playerId]->m_PlayerName; }
 	
 	const std::string& GetPlayerSettingImage(int playerId)		{ return m_Character[m_PlayerData[playerId]->m_CharacterId].m_CharacterSettingImage; }
@@ -71,17 +72,17 @@ public:
 	const std::string& GetPlayerResultImage(int playerId)		{ return m_Character[m_PlayerData[playerId]->m_CharacterId].m_CharacterResultImage; }
 	const cocos2d::ccColor4B& GetPlayerColor(int playerId)		{ return m_Character[m_PlayerData[playerId]->m_CharacterId].m_CharacterColor; }
 
-	void			SetSelectedMapSize( MapSelect mapSize );
+	bool			SetSelectedMapSize( MapSelect mapSize );
 	MapSelect		GetSelectedMapSize() { return m_SelectedMapSize; }
 
-	void		SetPlayerNumber(int playerNumber)			{m_PlayerNumber = playerNumber;}
-	int			GetplayerNumber()							{return m_PlayerNumber; }
+	bool		SetPlayerNumber(int playerNumber)			{ m_PlayerNumber = playerNumber; return true; }
+	int			GetplayerNumber()							{ return m_PlayerNumber; }
 
 	bool IsPossible(IndexedPosition indexedPosition);
 	bool IsClosed(IndexedPosition indexedPosition);
 
 	/*	Setting Scene 관련에서 게임 시작까지	*/
-	void StartGame();
+	bool StartGame();
 	void CreateMap();
 	void InitRandomMap();
 

@@ -9,4 +9,7 @@ public:
 	virtual void update(float dt);
 
 	CREATE_FUNC(CPlayScene);
+
+private:
+	bool m_GameEndFlag;
 };

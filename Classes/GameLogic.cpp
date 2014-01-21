@@ -108,9 +108,11 @@ bool CGameLogic::init()
 	return true;
 }
 
-void CGameLogic::SetSelectedMapSize( MapSelect mapSize )
+bool CGameLogic::SetSelectedMapSize( MapSelect mapSize )
 {
 	m_SelectedMapSize = mapSize;
+
+	return true;
 }
 
 void CGameLogic::UpdatePlayerResult( int playerId, MO_ITEM item )
@@ -414,12 +416,14 @@ void CGameLogic::SetMapFlag( IndexedPosition indexedPosition,bool flag )
 	m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Flag = flag;
 }
 
-void CGameLogic::SetPlayerName(int playerId,  const std::string& playerName )
+bool CGameLogic::SetPlayerName(int playerId,  const std::string& playerName )
 {
 	m_PlayerData[playerId]->m_PlayerName = playerName;
+
+	return true;
 }
 
-void CGameLogic::SetPlayerCharacterId( int characterId )
+bool CGameLogic::SetPlayerCharacterId( int characterId )
 {
 	// IsCharacterSelected 검사를 해서 선택되어 있으면 못 하게
 	// 	if ( isCharacterSelected(characterId) )
@@ -437,7 +441,7 @@ void CGameLogic::SetPlayerCharacterId( int characterId )
 			m_PlayerData[i]->m_CharacterId = -1;
 			m_PlayerData[i]->m_PlayerId = -1;
 
-			return;
+			return false;
 		}
 	}
 
@@ -451,6 +455,7 @@ void CGameLogic::SetPlayerCharacterId( int characterId )
 		}
 	}
 
+	return true;
 	// 이 밑의 코드는 안 쓴다!
 	//이미 선택했던 캐릭터가 있다면 이전 캐릭터는 풀어준다.
 	// 	if (m_PlayerData[playerId]->m_CharacterId != -1)
@@ -460,7 +465,7 @@ void CGameLogic::SetPlayerCharacterId( int characterId )
 	// 	m_PlayerData[playerId]->m_CharacterId = characterId;
 }
 
-void CGameLogic::StartGame()
+bool CGameLogic::StartGame()
 {
 	// 턴 생성 & 플레이어별로 턴 저장
 	for (int i = 0 ; i < MAX_PLAYER_NUM; ++i)
@@ -487,6 +492,8 @@ void CGameLogic::StartGame()
 
 	// 맵에 랜덤으로 선, 아이템 뿌리기 (크기 반영)
 	InitRandomMap();
+
+	return true;
 }
 
 void CGameLogic::CreateMap()
