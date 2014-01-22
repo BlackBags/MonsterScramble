@@ -32,15 +32,17 @@ CMO_line* CMO_line::Create(IndexedPosition indexedPosition)
 	//소유주에 따른 그림 파일 들
 	static std::string objectNames[4] =
 	{
-		"image/MO_line_horizontal.png",
 		"image/MO_line_vertical.png",
-		"image/MO_line_horizontal_c.png",
+		"image/MO_line_horizontal.png",
 		"image/MO_line_vertical_c.png",
+		"image/MO_line_horizontal_c.png",
 	};
 
+	//i가 홀수고 j가 짝수면 누워 있다.
+	//i가 짝수고 j가 홀수면 서 있다.
 	//짝수행인 경우 수평으로 긴 라인. 홀수행인 경우 수직으로 긴 라인.
-	int width = (indexedPosition.m_PosI%2==0)? 200.0f : 50.0f ;
-	int height = (indexedPosition.m_PosI%2==0)? 50.0f : 200.0f  ;
+	int width = (indexedPosition.m_PosI%2==0)? DEFAULT_LINE_WEIGHT : DEFAULT_TILE_SIZE ;
+	int height = (indexedPosition.m_PosI%2==0)? DEFAULT_TILE_SIZE : DEFAULT_LINE_WEIGHT  ;
 
 	int objectIdx = indexedPosition.m_PosI%2;
 

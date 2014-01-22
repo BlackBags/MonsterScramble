@@ -39,8 +39,8 @@ CMO_tile* CMO_tile::Create(IndexedPosition indexedPosition)
 		"image/MO_tile.png"
 	};
 	
-	int objectIdx = CGameManager::GetInstance()->GetMapOwner(indexedPosition);
-	CMO_tile* pMapObejct = CMO_tile::create(objectNames[objectIdx].c_str(), CCRectMake(0.0f, 0.0f, 200.0f,  200.0f));
+	//int objectIdx = CGameManager::GetInstance()->GetMapOwner(indexedPosition);
+	CMO_tile* pMapObejct = CMO_tile::create(objectNames[0].c_str(), CCRectMake(0.0f, 0.0f, DEFAULT_TILE_SIZE,  DEFAULT_TILE_SIZE));
 
 	return pMapObejct;
 }

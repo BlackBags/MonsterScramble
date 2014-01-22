@@ -1,27 +1,38 @@
-#ifndef MonsterScramble_MapObject
-#define MonsterScramble_MapObject
-
 #pragma once
-#include "cocos2d.h"
-#include "config.h"
+#include "CMO_dot.h"
 
+USING_NS_CC;
 
-class CMO_dot : public cocos2d::CCSprite
+CMO_dot::CMO_dot()
 {
-public:
-	CMO_dot();
-	~CMO_dot();
+}
 
-protected:
-	static CMO_dot* create(const char* pszFileName, const cocos2d::CCRect& rect);
+CMO_dot::~CMO_dot()
+{
 
-public:
-	static CMO_dot* Create();
-	void update(float delta);
+}
 
+CMO_dot* CMO_dot::create(const char* pszFileName, const CCRect& rect)
+{
+	CMO_dot* pSprite = new CMO_dot();
+	if (pSprite && pSprite->initWithFile(pszFileName, rect))
+	{
+		pSprite->autorelease();
+		return pSprite;
+	}
 
-private:
-};
+	CC_SAFE_DELETE(pSprite);
+	return NULL;
+}
 
-#endif
+CMO_dot* CMO_dot::Create()
+{
+	CMO_dot* pMapObejct = CMO_dot::create("image/MO_dot.png", CCRectMake(0.0f, 0.0f, 10.0f,  10.0f));
 
+	return pMapObejct;
+}
+
+void CMO_dot::update( float delta )
+{
+
+}

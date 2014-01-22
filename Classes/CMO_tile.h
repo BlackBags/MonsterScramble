@@ -1,10 +1,6 @@
-#ifndef MonsterScramble_MapObject
-#define MonsterScramble_MapObject
-
 #pragma once
 #include "cocos2d.h"
 #include "config.h"
-
 
 class CMO_tile : public cocos2d::CCSprite
 {
@@ -25,5 +21,4 @@ private:
 
 };
 
-#endif
 
