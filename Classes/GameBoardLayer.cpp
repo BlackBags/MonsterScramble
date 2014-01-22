@@ -202,7 +202,6 @@ void CGameBoardLayer::update(float dt)
 {
 	//여기서 child들을 업데이트 해야 합니다.
 	CCLog("1111 Board layer updated");
-	CCObject* node = NULL;
-	CCARRAY_FOREACH(this->getChildren(), node);
-	node->update(0.0f);
+	CCArray* childeren = this->getChildren();
+	childeren->update(dt); //안되네 ㅋㅋ
 }
