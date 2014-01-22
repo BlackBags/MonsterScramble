@@ -228,3 +228,39 @@ MapSelect	CGameManager::GetSelectedMapSize()
 		return CGameLogic::GetInstance()->GetSelectedMapSize();
 	}
 }
+
+MO_TYPE CGameManager::GetMapType( IndexedPosition indexedPosition )
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->GetMapType(indexedPosition);
+	}
+}
+
+MO_OWNER CGameManager::GetMapOwner( IndexedPosition indexedPosition )
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->GetMapOwner(indexedPosition);
+	}
+}
+
+MO_ITEM CGameManager::GetItem( IndexedPosition indexedPosition )
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->GetItem(indexedPosition);
+	}
+}

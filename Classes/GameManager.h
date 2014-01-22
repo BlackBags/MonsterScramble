@@ -37,6 +37,12 @@ public:
 	// 맵
 	void		SetMapSize(MapSelect mapSize);
 	MapSelect	GetSelectedMapSize();
+	MO_TYPE		GetMapType(IndexedPosition indexedPosition);
+	MO_TYPE		GetMapType(const int& i, const int& j) { return GetMapType(IndexedPosition(i, j) );}
+	MO_OWNER	GetMapOwner(IndexedPosition indexedPosition); 
+	MO_OWNER	GetMapOwner( const int& i , const int& j ) {return GetMapOwner(IndexedPosition(i, j));}
+	MO_ITEM		GetItem(IndexedPosition indexedPosition);
+	MO_ITEM		GetItem( const int& i , const int& j ) { return GetItem(IndexedPosition(i,j));}
 
 	// 턴
 	// 현재 턴에 해당하는 플레이어 'ID'를 반환한다.

@@ -17,7 +17,8 @@ protected:
 
 public:
 	//게임데이터에서 가져온 m_map의 m_Type를 받아와서 오브젝트를 생성한다.
-	static CMapObject* Create(MO_TYPE type);
+	//targetRow : Line이 vertical인지, horizontal인지 확인하는 인자.
+	static CMapObject* Create(MO_TYPE type,int targetRow);
 
 	int GetMapType();
 	void SetMapType(MO_TYPE type);
