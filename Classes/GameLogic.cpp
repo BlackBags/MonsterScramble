@@ -11,6 +11,8 @@ CGameLogic::CGameLogic(void)
 	{
 		m_PlayerData[i] = nullptr;
 	}
+
+	m_currentTurn = 0;
 }
 
 
@@ -680,4 +682,37 @@ void CGameLogic::SetItem( IndexedPosition indexedPosition, MO_ITEM item )
 	assert(indexedPosition.m_PosI < MAX_MAP_WIDTH && indexedPosition.m_PosJ < MAX_MAP_HEIGHT) ;
 
 	m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Item = item;
+}
+
+bool CGameLogic::EventHandle(IndexedPosition indexedPosition)
+{
+	if (!IsPossible(indexedPosition) )
+	{
+		return false;
+	}
+
+	//IsPossible 체크 후에 일단 그리고 나서 닫힌 여부 체크
+	DrawLine(indexedPosition);
+
+	for (int i = 0; i < m_ClosedTile.size(); ++i)
+	{
+		m_ClosedTile[i].m_PosI = 0;
+		m_ClosedTile[i].m_PosJ = 0;
+	}
+
+	if (IsClosed(indexedPosition))
+	{
+		int i = 0;
+		while (m_ClosedTile[i].m_PosI != 0 && m_ClosedTile[i].m_PosJ != 0 )
+		{
+			//본래 타일에 뭐가 있었는지 확인해서 각자 바꿀 것!!
+			m_Map[m_ClosedTile[i].m_PosI][m_ClosedTile[i].m_PosJ].m_Owner = (MO_OWNER)(m_currentTurn % m_PlayerNumber);
+			--m_VoidTileCount;
+			i++;
+		}
+	}
+
+	++m_currentTurn;
+
+	return true;
 }

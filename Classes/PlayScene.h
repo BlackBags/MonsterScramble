@@ -12,4 +12,8 @@ public:
 
 private:
 	bool m_GameEndFlag;
+
+	cocos2d::CCLayer* gameBoard;
+	cocos2d::CCLayer* player;
+	cocos2d::CCLayer* timer;
 };

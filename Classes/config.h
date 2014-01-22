@@ -121,6 +121,8 @@ const int MO_TYPE_NUMBER = 6;
 /*	지도 초기화 할 때 맵 탐사하는 배열 길이 (함수 구조 변경 후 삭제 예정) */
 const int CHECKLIST_LENGTH = 100;
 
+/*	터치 인식 범위 */
+const float TOUCH_AREA = 30.0f;
 
 /*	결과 화면 오브젝트들의 기본 크기입니다 */
 const float SC_RT_HORIZONTAL_MARGIN = 70.0f;

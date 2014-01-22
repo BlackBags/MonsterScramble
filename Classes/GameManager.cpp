@@ -273,7 +273,7 @@ void CGameManager::DrawLine( IndexedPosition indexedPosition )
 	}
 	else
 	{
-		CGameLogic::GetInstance()->DrawLine(indexedPosition);
+		SetUpdateFlag(CGameLogic::GetInstance()->EventHandle(indexedPosition) );
 		CCLOG("draw line : %d, %d",indexedPosition.m_PosI,indexedPosition.m_PosJ);
 	}
 }

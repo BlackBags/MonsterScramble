@@ -13,7 +13,7 @@ protected:
 
 public:
 	static CMO_tile* Create(IndexedPosition indexedPosition);
-	void update(float delta);
+	virtual void update(float delta);
 
 
 private:

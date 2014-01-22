@@ -24,16 +24,16 @@ bool CPlayScene::init(void)
 	CCLayer* BackgroundLayer = CBackgroundLayer::create();
 	this->addChild(BackgroundLayer, 0);
 
-	CCLayer* gameBoard = CGameBoardLayer::create();
+	gameBoard = CGameBoardLayer::create();
 	this->addChild(gameBoard, 1);
 
 	CCLayer* helpButton = CHelpButtonLayer::create();
 	this->addChild(helpButton, 1);
 
-	CCLayer* player = CPlayerLayer::create();
+	player = CPlayerLayer::create();
 	this->addChild(player, 1);
 
-	CCLayer* timer = CTimerLayer::create();
+	timer = CTimerLayer::create();
 	this->addChild(timer, 1);
 
 	CCLayer* helpWindow = CHelpWindowLayer::create();
@@ -69,6 +69,10 @@ void CPlayScene::update(float dt)
 	{
 		//여기에 각 레이어들을 업데이트하는 코드를 넣음
 		//각 레이어별로 업데이트 함수 만들어야 함
+
+		gameBoard->update(dt);
+		player->update(dt);
+		timer->update(dt);
 
 		//업데이트된 내용을 모두 받아와서 갱신했으므로 flag는 원래대로 false로 만든다
 		CGameManager::GetInstance()->SetUpdateFlag(false);

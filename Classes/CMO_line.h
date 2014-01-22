@@ -14,6 +14,7 @@ protected:
 
 public:
 	static CMO_line* Create(IndexedPosition indexedPosition);
+	virtual void update(float delta);
 
 private:
 };

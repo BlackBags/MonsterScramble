@@ -54,3 +54,9 @@ CMO_line* CMO_line::Create(IndexedPosition indexedPosition)
 
 	return pMapObejct;
 }
+
+void CMO_line::update( float delta )
+{
+	CCLog("Line updated");
+	//현재 타일 소유를 물어보고 업데이트
+}

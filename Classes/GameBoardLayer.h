@@ -8,6 +8,7 @@ public:
 	virtual bool init();
 
 	void DrawMapObjects();
+	virtual void update(float dt);
 
 	void ccTouchesBegan(cocos2d::CCSet* pTouches, cocos2d::CCEvent* pEvent);
 	void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
@@ -24,6 +25,5 @@ private:
 	cocos2d::CCPoint m_StartPoint;
 	cocos2d::CCPoint m_EndPoint;
 	cocos2d::CCPoint m_BoardOrigin;
-
 };
 

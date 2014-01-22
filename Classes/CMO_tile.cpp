@@ -47,5 +47,5 @@ CMO_tile* CMO_tile::Create(IndexedPosition indexedPosition)
 
 void CMO_tile::update( float delta )
 {
-
+	//현재 타일 소유를 물어보고 업데이트
 }

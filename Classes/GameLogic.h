@@ -87,6 +87,7 @@ public:
 	void InitRandomMap();
 
 	/* 주어진 index로 선을 연결한다. */
+	bool EventHandle(IndexedPosition indexedPosition);
 	void DrawLine(const IndexedPosition& indexedPosition);
 
 	/*	주어진 index의 울타리 주변 타일을 확인 합니다 */
@@ -148,7 +149,10 @@ private:
 
 	/*	주인이 없는 타일의 수를 저장하는 변수 : 종료 조건을 쉽게 확인하기 위해서 생성 */
 	int	m_VoidTileCount;
-	
+
+	/*	turn관련 변수 */
+	int m_currentTurn;
+
 	/* 닫힌 도형 검사용 배열 */
 	std::array<IndexedPosition, CHECKLIST_LENGTH> m_ClosedTile;
 
