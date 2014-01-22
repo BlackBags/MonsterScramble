@@ -86,6 +86,9 @@ public:
 	void CreateMap();
 	void InitRandomMap();
 
+	/* 주어진 index로 선을 연결한다. */
+	void DrawLine(const IndexedPosition& indexedPosition);
+
 	/*	주어진 index의 울타리 주변 타일을 확인 합니다 */
 	void CollectClosedTile(IndexedPosition indexedPosition, Direction direction);
 
@@ -154,7 +157,6 @@ private:
 	bool		GetMapFlag(IndexedPosition indexedPosition) { return m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Flag; }
 
 	/*	타일의 선을 연결하는 함수	*/
-	void DrawLine(const IndexedPosition& indexedPosition);
 	void DeleteLine( const IndexedPosition& indexedPosition );
 
 	/*	아이템 관련 함수 */

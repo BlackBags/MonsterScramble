@@ -264,3 +264,16 @@ MO_ITEM CGameManager::GetItem( IndexedPosition indexedPosition )
 		return CGameLogic::GetInstance()->GetItem(indexedPosition);
 	}
 }
+
+void CGameManager::DrawLine( IndexedPosition indexedPosition )
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		CGameLogic::GetInstance()->DrawLine(indexedPosition);
+		CCLOG("draw line : %d, %d",indexedPosition.m_PosI,indexedPosition.m_PosJ);
+	}
+}
