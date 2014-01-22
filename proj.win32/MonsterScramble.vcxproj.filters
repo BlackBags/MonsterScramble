@@ -129,9 +129,6 @@
     <ClCompile Include="..\Classes\PlayerNameSettingLayer.cpp">
       <Filter>Classes\Layer\GameSetting</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MapObject.cpp">
-      <Filter>Classes\Layer\Play</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\HelpScene.cpp">
       <Filter>Classes\Scene\HelpScene</Filter>
     </ClCompile>
@@ -140,6 +137,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\StartAndHelpButtonLayer.cpp">
       <Filter>Classes\Layer\GameSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CMO_dot.cpp">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CMO_item.cpp">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CMO_line.cpp">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CMO_tile.cpp">
+      <Filter>Classes\Layer\Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,9 +227,6 @@
     <ClInclude Include="..\Classes\PlayerNameSettingLayer.h">
       <Filter>Classes\Layer\GameSetting</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MapObject.h">
-      <Filter>Classes\Layer\Play</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\HelpScene.h">
       <Filter>Classes\Scene\HelpScene</Filter>
     </ClInclude>
@@ -229,6 +235,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\StartAndHelpButtonLayer.h">
       <Filter>Classes\Layer\GameSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CMO_dot.h">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CMO_item.h">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CMO_line.h">
+      <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CMO_tile.h">
+      <Filter>Classes\Layer\Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
