@@ -165,7 +165,7 @@ IndexedPosition CGameBoardLayer::ConvertCoordinate(CCPoint point)
 	IndexedPosition indexedPosition;
 	
 	//먼저, 범위를 벗어났는지 확인한다.
-	if ((point.x - m_BoardOrigin.x) < 0 || (point.y - m_BoardOrigin.y) < 0 || (m_VisibleSize.width - point.x) < m_BoardOrigin.x || (m_VisibleSize.height - point.y) < m_BoardOrigin.y)
+	if ((point.x - m_BoardOrigin.x) < -20 || (point.y - m_BoardOrigin.y) < -20 || (m_VisibleSize.width - point.x) < m_BoardOrigin.x-20 || (m_VisibleSize.height - point.y) < m_BoardOrigin.y-20)
 	{
 		indexedPosition.m_PosI = 0;
 		indexedPosition.m_PosJ = 0;
