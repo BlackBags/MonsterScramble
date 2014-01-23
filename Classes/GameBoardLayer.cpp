@@ -37,13 +37,13 @@ bool CGameBoardLayer::init()
 		break;
 	}
 
-	CCSprite * board = CCSprite::create(
+	m_Board = CCSprite::create(
 		"image/board.png", 
 		CCRect(0, 0, columnNum * DEFAULT_TILE_SIZE, rowNum * DEFAULT_TILE_SIZE)
 		);
-	board->setAnchorPoint(ccp(0.5f, 0.5f));
-	board->setPosition(ccp(m_VisibleSize.width / 2, m_VisibleSize.height / 2) );
-	this->addChild(board);
+	m_Board->setAnchorPoint(ccp(0.5f, 0.5f));
+	m_Board->setPosition(ccp(m_VisibleSize.width / 2, m_VisibleSize.height / 2) );
+	this->addChild(m_Board);
 
 	m_BoardOrigin.x = ( m_VisibleSize.width - (DEFAULT_TILE_SIZE * columnNum) ) / 2;
 	m_BoardOrigin.y = ( m_VisibleSize.height - (DEFAULT_TILE_SIZE * rowNum) ) / 2;
@@ -63,7 +63,7 @@ bool CGameBoardLayer::init()
 				pTile->setAnchorPoint( ccp(0, 0) );
 				pTile->setPosition( ccp( DEFAULT_TILE_SIZE * (j/2 - 1), DEFAULT_TILE_SIZE*(i/2 - 1) ) );
 
-				board->addChild(pTile, 0);
+				m_Board->addChild(pTile, 0);
 			}
 			// 행, 열 모두 홀수일 경우 닷을 그린다.
 			else if ( i % 2 == 1 && j % 2 == 1)
@@ -71,7 +71,7 @@ bool CGameBoardLayer::init()
 				CMO_dot* pDot = CMO_dot::Create();
 				pDot->setPosition( ccp( DEFAULT_TILE_SIZE * (j/2), DEFAULT_TILE_SIZE * (i/2) ) );
 
-				board->addChild(pDot, 2);
+				m_Board->addChild(pDot, 2);
 			}
 			//그 외에는 선이다.
 			else
@@ -89,7 +89,7 @@ bool CGameBoardLayer::init()
 					pLine->setPosition( ccp( DEFAULT_TILE_SIZE * (j/2), DEFAULT_TILE_SIZE * (i/2 - 1) ) );
 				}
 
-				board->addChild(pLine, 1);
+				m_Board->addChild(pLine, 1);
 			}			
 		}
 	}
@@ -201,7 +201,12 @@ IndexedPosition CGameBoardLayer::ConvertCoordinate(CCPoint point)
 void CGameBoardLayer::update(float dt)
 {
 	//여기서 child들을 업데이트 해야 합니다.
-	CCLog("1111 Board layer updated");
-	CCArray* childeren = this->getChildren();
-	childeren->update(dt); //안되네 ㅋㅋ
+	//CCLog("1111 Board layer updated");
+	CCArray* mapObjects = m_Board->getChildren();
+
+	unsigned int objectNum = mapObjects->count();
+	for (unsigned int i = 0; i < objectNum; ++i)
+	{
+		mapObjects->objectAtIndex(i)->update(dt);
+	}
 }
