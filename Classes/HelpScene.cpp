@@ -1,6 +1,7 @@
 #include "HelpScene.h"
 #include "BackgroundLayer.h"
 #include "HelpTutorialLayer.h"
+#include "PlayerNameSettingLayer.h"
 
 USING_NS_CC;
 

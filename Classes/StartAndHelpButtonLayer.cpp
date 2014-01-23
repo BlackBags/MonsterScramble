@@ -2,6 +2,7 @@
 #include "PlayScene.h"
 #include "HelpScene.h"
 #include "GameManager.h"
+#include "PlayerNameSettingScene.h"
 
 USING_NS_CC;
 
@@ -32,7 +33,7 @@ bool CStartAndHelpButtonLayer::init()
 		"image/icon_help.png",
 		"image/icon_help.png",
 		this,
-		menu_selector(CStartAndHelpButtonLayer::StartButtonCallBack)
+		menu_selector(CStartAndHelpButtonLayer::HelpButtonCallBack)
 		);
 
 	// 조심해! 지금은 그냥 StartButton 옆에 띄운다
@@ -61,11 +62,13 @@ void CStartAndHelpButtonLayer::StartButtonCallBack( CCObject* pSender )
 
 void CStartAndHelpButtonLayer::HelpButtonCallBack( CCObject* pSender )
 {
-	CGameManager::GetInstance()->StartGame();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
 	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
 #else
-	CCScene* newScene = CHelpScene::create();
+	// 조심해! 여기 Change Scene 대신 팝업 레이어로 바꿔야 해!
+	//CCScene* newScene = CHelpScene::create();
+	// test : NameSettingScene 기능 테스트를 위해
+	CCScene* newScene = CPlayerNameSettingScene::create();
 	CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, newScene) );
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	exit(0);

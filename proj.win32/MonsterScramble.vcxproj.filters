@@ -55,6 +55,9 @@
     <Filter Include="Classes\Layer\Help">
       <UniqueIdentifier>{cfd165ea-a4f3-4b14-9269-c92cb9704d49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scene\PlayerNameSettingScene">
+      <UniqueIdentifier>{7930f1c5-0bb1-4223-917c-c4ee2386e864}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -149,6 +152,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\CMO_tile.cpp">
       <Filter>Classes\Layer\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayerNameSettingScene.cpp">
+      <Filter>Classes\Scene\PlayerNameSettingScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CMO_tile.h">
       <Filter>Classes\Layer\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayerNameSettingScene.h">
+      <Filter>Classes\Scene\PlayerNameSettingScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
