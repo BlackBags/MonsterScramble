@@ -154,7 +154,8 @@ int CGameLogic::GetPlayerResult(int playerId, MO_ITEM item)
 
 bool CGameLogic::IsPossible(IndexedPosition indexedPosition)
 {
-	if (m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type == MO_LINE_UNCONNECTED ||m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type == MO_LINE_HIDDEN)
+	if (m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type == MO_LINE_UNCONNECTED 
+		|| m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type == MO_LINE_HIDDEN)
 	{
 		int tileVoidCount = 0;
 
@@ -180,7 +181,7 @@ bool CGameLogic::IsPossible(IndexedPosition indexedPosition)
 bool CGameLogic::IsClosed( IndexedPosition indexedPosition )
 {
 	//선택된 울타리의 위쪽 확인
-	CollectClosedTile(indexedPosition,DI_UP);
+	CollectClosedTile(indexedPosition, DI_UP);
 	if (m_ClosedTile[0].m_PosI != 0 && m_ClosedTile[0].m_PosJ != 0)
 		return true;
 
@@ -278,18 +279,18 @@ void CGameLogic::CollectClosedTile( IndexedPosition indexedPosition, Direction d
 				}
 				//memset(m_ClosedTile, 0, sizeof(IndexedPosition) * CHECKLIST_LENGTH);
 
-				for (int i = 0; i < m_ClosedTile.size(); ++i)
+				for (int idx = 0; idx < m_ClosedTile.size(); ++idx)
 				{
-					m_ClosedTile[i].m_PosI = 0;
-					m_ClosedTile[i].m_PosJ = 0;
+					m_ClosedTile[idx].m_PosI = 0;
+					m_ClosedTile[idx].m_PosJ = 0;
 				}
 #ifdef _DEBUG
-				CCLOG("센티넬을 만났다\n");
+				CCLOG("sentinel !!!");
 #endif
 				break;
 			}
 #ifdef _DEBUG
-			CCLOG("idx I : %d / idx J : %d\n", currentTile.m_PosI, currentTile.m_PosJ);
+			CCLOG("idx I : %d / idx J : %d", currentTile.m_PosI, currentTile.m_PosJ);
 #endif
 			//현재 타일의 위쪽 확인
 			if (m_Map[currentTile.m_PosI - 1][currentTile.m_PosJ].m_Type == MO_LINE_UNCONNECTED)
@@ -359,6 +360,7 @@ void CGameLogic::CollectClosedTile( IndexedPosition indexedPosition, Direction d
 				}				
 			}
 		}
+
 		//닫힌 타일이 있으므로 애니메이션 실행하라는 플래그 설정
 		SetTileAnimationTurnNumber(animationTurn);
 	}
@@ -547,7 +549,7 @@ bool CGameLogic::StartGame()
 	CreateMap();
 
 	// 맵에 랜덤으로 선, 아이템 뿌리기 (크기 반영)
-	InitRandomMap();
+	//InitRandomMap();
 
 	return true;
 }
@@ -783,5 +785,14 @@ int CGameLogic::GetPlayerIdByTurn( int currentTurn )
 
 MO_TYPE CGameLogic::IsConnected(IndexedPosition indexedPosition)
 {
-	return m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type;
+	MO_TYPE tempType = m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type;
+
+	if (tempType == MO_LINE_CONNECTED || tempType == MO_LINE_UNCONNECTED)
+	{
+		return m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type;
+	}
+	else
+	{
+		CCLOG("what a %d", tempType);
+	}
 }
