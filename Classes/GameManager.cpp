@@ -177,8 +177,14 @@ int CGameManager::GetCharacterId( int playerId )
 
 int CGameManager::GetPlayerIdByTurn( int currentTurn )
 {
-	// Á¶½ÉÇØ!!
-	return 0;
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+	}
+	return -1;
 }
 
 void CGameManager::StartGame()

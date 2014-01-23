@@ -10,4 +10,12 @@ bool CPlayerLayer::init()
 	{
 		return false;
 	}
+
+	return true;
+
+}
+
+void CPlayerLayer::update( float dt )
+{
+
 }

@@ -6,7 +6,7 @@
 //플레이어 데이터
 struct PlayerData
 {
-	PlayerData() : m_PlayerId(-1), m_PlayerName("꿀호떡"), m_CharacterId(-1),
+	PlayerData() : m_PlayerId(-1), m_PlayerName("꿀호떡"), m_CharacterId(-1),m_PlayerTurn(-1),m_nextPlayer(nullptr),
 						m_MyTile(0), m_MyGold(0), m_MyTrash(0), m_MyTotalScore(0) {}
 
 	//플레이어의 고유 아이디 ( 온라인 모드일 시 clientID를 의미 )
@@ -18,6 +18,7 @@ struct PlayerData
 	int m_CharacterId;
 	
 	int m_PlayerTurn;
+	PlayerData* m_nextPlayer;
 
 	int m_MyTile;
 	int m_MyGold;
@@ -56,8 +57,8 @@ public:
 	//조심해!!
 	//이 함수는 필요 없을 것 같음. m_PlayerId = playerIdx 이므로 이미 알고 있는 정보를 다시 요청하는 것 같음
 	int GetPlayerId(int playerIdx) { return m_PlayerData[playerIdx]->m_PlayerId; }
-
 	int GetPlayerTurnById(int playerId) { return m_PlayerData[playerId]->m_PlayerTurn; }
+	PlayerData* GetFirstPlayer();
 
 	//캐릭터를 플레이어에게 짝지어 준다.
 	bool SetPlayerCharacterId(int characterId);
@@ -130,9 +131,10 @@ private:
 	// 플레이어 데이터를 가지고 있는 구조체
 	std::array<PlayerData*, MAX_PLAYER_NUM> m_PlayerData;
 	std::array<Character, CHARACTER_NUM> m_Character;
+	PlayerData* m_FirstPlayer;
 
 	//플레이 순서에 매칭되는 PlayerData의 포인터
-	std::list<PlayerData*> m_PlayerDataByTurn;
+	//std::list<PlayerData*> m_PlayerDataByTurn;
 
 	/*	맵 관련 변수들 */
 

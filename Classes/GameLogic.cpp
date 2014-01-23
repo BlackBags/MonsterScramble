@@ -470,25 +470,61 @@ bool CGameLogic::SetPlayerCharacterId( int characterId )
 bool CGameLogic::StartGame()
 {
 	// 턴 생성 & 플레이어별로 턴 저장
-	for (int i = 0 ; i < MAX_PLAYER_NUM; ++i)
+
+	//순서를 바꾼 후
+	std::array<int,4> tempTurn = {0,1,2,3};
+	srand( static_cast<unsigned int>(time(NULL)) );
+	std::random_shuffle(tempTurn.begin(), tempTurn.end());
+
+	PlayerData* current;
+	int tempT=0;
+	for(int i = 0; i<m_PlayerNumber;++i)
 	{
-		// PlayerId가 -1이 아닐 경우에만 TurnList에 랜덤한 순서로 넣어준다.
-		if ( m_PlayerData[i]->m_PlayerId != -1 )
-		{
-			int currentListSize = m_PlayerDataByTurn.size();
-
-			int randomPosition = rand() % ( currentListSize + 1 );
-
-			std::list<PlayerData*>::iterator iterInsertPos = m_PlayerDataByTurn.begin();
-
-			for (int j = 0 ; j < randomPosition; ++j)
-			{
-				++iterInsertPos;
-			}
-
-			m_PlayerDataByTurn.insert(iterInsertPos, m_PlayerData[i]);
-		}
+		if(tempTurn[tempT] >= m_PlayerNumber)
+			tempT++;
+		m_PlayerData[i]->m_PlayerTurn= tempTurn[tempT];
+		if(tempTurn[tempT] == 0)
+			current = m_PlayerData[i];
+		tempT++;
 	}
+
+	//이제 링크드 리스트를 만들어주자!
+	for(int i = 0; i<m_PlayerNumber;i++)
+	{
+		for(int j = 0; j<m_PlayerNumber;j++)
+		{
+			if(m_PlayerData[i]->m_PlayerTurn+1 == m_PlayerData[j]->m_PlayerTurn)
+				m_PlayerData[i]->m_nextPlayer = m_PlayerData[j];
+		}
+		if(m_PlayerData[i]->m_PlayerTurn == 0)
+			m_FirstPlayer = m_PlayerData[i];
+	}
+	m_PlayerData[m_PlayerNumber-1]->m_nextPlayer = m_FirstPlayer;
+
+
+
+
+
+// 	for (int i = 0 ; i < MAX_PLAYER_NUM; ++i)
+// 	{
+// 		// PlayerId가 -1이 아닐 경우에만 TurnList에 랜덤한 순서로 넣어준다.
+// 		if ( m_PlayerData[i]->m_PlayerId != -1 )
+// 		{
+// 			int currentListSize = m_PlayerDataByTurn.size();
+// 
+// 			int randomPosition = rand() % ( currentListSize + 1 );
+// 
+// 			std::list<PlayerData*>::iterator iterInsertPos = m_PlayerDataByTurn.begin();
+// 
+// 			for (int j = 0 ; j < randomPosition; ++j)
+// 			{
+// 				++iterInsertPos;
+// 			}
+// 
+// 			m_PlayerDataByTurn.insert(iterInsertPos, m_PlayerData[i]);
+// 		}
+// 	}
+
 	// 맵 생성
 	CreateMap();
 
