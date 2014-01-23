@@ -340,7 +340,7 @@ struct MapObject
 		{}
 
 	MO_TYPE		m_Type;
-	MO_OWNER		m_Owner;
+	MO_OWNER	m_Owner;
 	MO_ITEM		m_Item;
 	
 	bool m_Flag;
@@ -350,4 +350,12 @@ struct MapObject
 	DWORD		m_StartTime;
 	int			m_AnimationTurn;
 	Direction	m_Direction;
+};
+
+const std::string lineImageFileList[4] =
+{
+	"image/MO_line_vertical.png",
+	"image/MO_line_horizontal.png",
+	"image/MO_line_vertical_c.png",
+	"image/MO_line_horizontal_c.png",
 };

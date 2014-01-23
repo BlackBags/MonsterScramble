@@ -780,3 +780,9 @@ int CGameLogic::GetPlayerIdByTurn( int currentTurn )
 	}
 	return currentPlayer->m_PlayerId;
 }
+}
+
+MO_TYPE CGameLogic::IsConnected(IndexedPosition indexedPosition)
+{
+	return m_Map[indexedPosition.m_PosI][indexedPosition.m_PosJ].m_Type;
+}

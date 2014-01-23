@@ -108,6 +108,8 @@ public:
 
 	bool IsEnd();
 
+	MO_TYPE IsConnected(IndexedPosition indexedPosition);
+
 	/*	애니메이션 상태를 지정, 반환하는 함수들 */
 	bool		GetLineAnimationFlag()									{ return m_LineAnimationFlag; }
 	int			GetTileAnimationTurnNumber()							{ return m_TileAnimationTurnNumber; }

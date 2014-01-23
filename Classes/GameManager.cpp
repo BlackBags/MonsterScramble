@@ -295,3 +295,15 @@ const std::string& CGameManager::GetCharacterPlayFaceById( int playerIdx )
 		return CGameLogic::GetInstance()->GetPlayerPlayImage(playerIdx);
 	}
 }
+
+MO_TYPE CGameManager::IsConnected(IndexedPosition indexedPosition)
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->IsConnected(indexedPosition);
+	}
+}

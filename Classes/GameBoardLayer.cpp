@@ -76,16 +76,16 @@ bool CGameBoardLayer::init()
 			//그 외에는 선이다.
 			else
 			{
-				CMO_line* pLine = CMO_line::Create(pos);
+				CMO_line* pLine = CMO_line::create();
+				pLine->setImage(pos);
+
 				//누워있다.
 				if ( j % 2 == 0 )
 				{
-					pLine->setAnchorPoint( ccp(0, 0.5) );
 					pLine->setPosition( ccp( DEFAULT_TILE_SIZE * (j/2 - 1), DEFAULT_TILE_SIZE * (i/2) ) );
 				}
 				else
 				{
-					pLine->setAnchorPoint( ccp(0.5, 0) );
 					pLine->setPosition( ccp( DEFAULT_TILE_SIZE * (j/2), DEFAULT_TILE_SIZE * (i/2 - 1) ) );
 				}
 
@@ -177,20 +177,20 @@ IndexedPosition CGameBoardLayer::ConvertCoordinate(CCPoint point)
 	//보드 내에서 dot을 클릭할 수 있는 범위인지 확인한다.
 	if (static_cast<int>(point.x - m_BoardOrigin.x) % static_cast<int>(DEFAULT_TILE_SIZE) < TOUCH_AREA)
 	{
-		indexedPosition.m_PosI = static_cast<int>(point.x - m_BoardOrigin.x) / static_cast<int>(DEFAULT_TILE_SIZE);
+		indexedPosition.m_PosJ = static_cast<int>(point.x - m_BoardOrigin.x) / static_cast<int>(DEFAULT_TILE_SIZE);
 	}
 	else if (static_cast<int>(point.x - m_BoardOrigin.x) % static_cast<int>(DEFAULT_TILE_SIZE) > DEFAULT_TILE_SIZE - TOUCH_AREA)
 	{
-		indexedPosition.m_PosI = static_cast<int>(point.x - m_BoardOrigin.x) / static_cast<int>(DEFAULT_TILE_SIZE) + 1;
+		indexedPosition.m_PosJ = static_cast<int>(point.x - m_BoardOrigin.x) / static_cast<int>(DEFAULT_TILE_SIZE) + 1;
 	}
 
 	if (static_cast<int>(point.y - m_BoardOrigin.y) % static_cast<int>(DEFAULT_TILE_SIZE) < TOUCH_AREA)
 	{
-		indexedPosition.m_PosJ = static_cast<int>(point.y - m_BoardOrigin.y) / static_cast<int>(DEFAULT_TILE_SIZE);
+		indexedPosition.m_PosI = static_cast<int>(point.y - m_BoardOrigin.y) / static_cast<int>(DEFAULT_TILE_SIZE);
 	}
 	else if (static_cast<int>(point.x - m_BoardOrigin.y) % static_cast<int>(DEFAULT_TILE_SIZE) > DEFAULT_TILE_SIZE - TOUCH_AREA)
 	{
-		indexedPosition.m_PosJ = static_cast<int>(point.y - m_BoardOrigin.y) / static_cast<int>(DEFAULT_TILE_SIZE) + 1;
+		indexedPosition.m_PosI = static_cast<int>(point.y - m_BoardOrigin.y) / static_cast<int>(DEFAULT_TILE_SIZE) + 1;
 	}
 	indexedPosition.m_PosI = indexedPosition.m_PosI * 2 + 1;
 	indexedPosition.m_PosJ = indexedPosition.m_PosJ * 2 + 1;
