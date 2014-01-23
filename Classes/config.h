@@ -359,3 +359,12 @@ const std::string lineImageFileList[4] =
 	"image/MO_line_vertical_c.png",
 	"image/MO_line_horizontal_c.png",
 };
+
+const std::string TileImageFileList[5] =
+	{
+		"image/MO_tile0.png",
+		"image/MO_tile1.png",
+		"image/MO_tile2.png",
+		"image/MO_tile3.png",
+		"image/MO_tile_void.png"
+	};

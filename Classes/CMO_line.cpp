@@ -113,7 +113,7 @@ void CMO_line::update( float delta )
 		//기존의 이미지는 삭제하고
 		int width = pLine->getContentSize().width;
 		int height = pLine->getContentSize().height;
-		this->removeAllChildren();
+		this->removeChild(pLine, true);
 
 		//바뀐 이미지로 추가
 		pLine = CCSprite::create(lineImageFileList[m_ImageFileIdx + 2].c_str(), CCRectMake(0.0f, 0.0f, width,  height) );

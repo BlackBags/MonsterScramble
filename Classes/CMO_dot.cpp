@@ -34,5 +34,5 @@ CMO_dot* CMO_dot::Create()
 
 void CMO_dot::update( float delta )
 {
-
+	//아무것도 안 함
 }

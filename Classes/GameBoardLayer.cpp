@@ -59,8 +59,8 @@ bool CGameBoardLayer::init()
 			//행, 열 모두 짝수 일 경우 타일을 그린다.
 			if ( i % 2 == 0 && j % 2 == 0)
 			{
-				CMO_tile* pTile = CMO_tile::Create(pos);
-				pTile->setAnchorPoint( ccp(0, 0) );
+				CMO_tile* pTile = CMO_tile::create();
+				pTile->setImage(pos);
 				pTile->setPosition( ccp( DEFAULT_TILE_SIZE * (j/2 - 1), DEFAULT_TILE_SIZE*(i/2 - 1) ) );
 
 				m_Board->addChild(pTile, 0);
