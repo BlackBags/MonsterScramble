@@ -770,3 +770,13 @@ bool CGameLogic::EventHandle(IndexedPosition indexedPosition)
 
 	return true;
 }
+
+int CGameLogic::GetPlayerIdByTurn( int currentTurn )
+{
+	PlayerData* currentPlayer = m_FirstPlayer;
+	for(int i = 0;i<currentTurn;i++)
+	{
+		currentPlayer = currentPlayer->m_nextPlayer;
+	}
+	return currentPlayer->m_PlayerId;
+}

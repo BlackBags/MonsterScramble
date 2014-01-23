@@ -183,8 +183,8 @@ int CGameManager::GetPlayerIdByTurn( int currentTurn )
 	}
 	else
 	{
+		return CGameLogic::GetInstance()->GetPlayerIdByTurn(currentTurn);
 	}
-	return -1;
 }
 
 void CGameManager::StartGame()
@@ -281,5 +281,17 @@ void CGameManager::DrawLine( IndexedPosition indexedPosition )
 	{
 		SetUpdateFlag(CGameLogic::GetInstance()->EventHandle(indexedPosition) );
 		CCLOG("draw line : %d, %d",indexedPosition.m_PosI,indexedPosition.m_PosJ);
+	}
+}
+
+const std::string& CGameManager::GetCharacterPlayFaceById( int playerIdx )
+{
+	if (m_IsOnlineGame)
+	{
+
+	}
+	else
+	{
+		return CGameLogic::GetInstance()->GetPlayerPlayImage(playerIdx);
 	}
 }

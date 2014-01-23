@@ -45,9 +45,10 @@ public:
 	MO_ITEM		GetItem( const int& i , const int& j ) { return GetItem(IndexedPosition(i,j));}
 	void		DrawLine(IndexedPosition indexedPosition);
 
-	// 턴
+	// 플레이어 관련
 	// 현재 턴에 해당하는 플레이어 'ID'를 반환한다.
 	int  GetPlayerIdByTurn(int currentTurn);
+	const std::string& GetCharacterPlayFaceById(int playerIdx);
 
 	void StartGame();
 	

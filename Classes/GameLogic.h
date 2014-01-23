@@ -58,7 +58,8 @@ public:
 	//이 함수는 필요 없을 것 같음. m_PlayerId = playerIdx 이므로 이미 알고 있는 정보를 다시 요청하는 것 같음
 	int GetPlayerId(int playerIdx) { return m_PlayerData[playerIdx]->m_PlayerId; }
 	int GetPlayerTurnById(int playerId) { return m_PlayerData[playerId]->m_PlayerTurn; }
-	PlayerData* GetFirstPlayer();
+	int GetPlayerIdByTurn(int currentTurn);
+	PlayerData* GetFirstPlayer() { return m_FirstPlayer; }
 
 	//캐릭터를 플레이어에게 짝지어 준다.
 	bool SetPlayerCharacterId(int characterId);
