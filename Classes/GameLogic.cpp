@@ -469,6 +469,22 @@ bool CGameLogic::SetPlayerCharacterId( int characterId )
 
 bool CGameLogic::StartGame()
 {
+	//////////////////////테스트용 플레이어 생성/////////////////////////////////////////////
+	m_PlayerData[0]= new PlayerData();
+	m_PlayerData[0]->m_CharacterId=1;
+	m_PlayerData[0]->m_PlayerId=0;
+	m_PlayerData[0]->m_PlayerName="아이디0";
+	m_PlayerData[1]= new PlayerData();
+	m_PlayerData[1]->m_CharacterId=0;
+	m_PlayerData[1]->m_PlayerId=1;
+	m_PlayerData[1]->m_PlayerName="아이디1";
+	m_PlayerData[2]= new PlayerData();
+	m_PlayerData[2]->m_CharacterId=3;
+	m_PlayerData[2]->m_PlayerId=2;
+	m_PlayerData[2]->m_PlayerName="아이디2";
+	m_PlayerNumber=3;
+	///////////////////////////////////////////////////////////////////////////////////////////
+
 	// 턴 생성 & 플레이어별로 턴 저장
 
 	//순서를 바꾼 후
@@ -498,8 +514,10 @@ bool CGameLogic::StartGame()
 		}
 		if(m_PlayerData[i]->m_PlayerTurn == 0)
 			m_FirstPlayer = m_PlayerData[i];
+		if(m_PlayerData[i]->m_nextPlayer ==nullptr)
+			tempT = i;
 	}
-	m_PlayerData[m_PlayerNumber-1]->m_nextPlayer = m_FirstPlayer;
+	m_PlayerData[tempT]->m_nextPlayer = m_FirstPlayer;
 
 
 
