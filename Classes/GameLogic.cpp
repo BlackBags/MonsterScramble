@@ -13,6 +13,8 @@ CGameLogic::CGameLogic(void)
 	}
 
 	m_currentTurn = 0;
+	m_VoidTileCount = 0;
+	m_PlayerNumber = 0;
 }
 
 
@@ -67,7 +69,7 @@ bool CGameLogic::init()
 	}
 
 	//캐릭터 관련 자료를 넣어준다.
-	for (int i = 0; i<CHARACTER_NUM; ++i)
+	for (int i = 0; i < CHARACTER_NUM; ++i)
 	{
 		switch (i)
 		{
@@ -444,6 +446,7 @@ bool CGameLogic::SetPlayerCharacterId( int characterId )
 		{
 			m_PlayerData[i]->m_CharacterId = -1;
 			m_PlayerData[i]->m_PlayerId = -1;
+			--m_PlayerNumber;
 
 			return false;
 		}
@@ -456,6 +459,9 @@ bool CGameLogic::SetPlayerCharacterId( int characterId )
 		{
 			m_PlayerData[i]->m_PlayerId = i;
 			m_PlayerData[i]->m_CharacterId = characterId;
+			++m_PlayerNumber;
+
+			return true;
 		}
 	}
 
@@ -471,6 +477,7 @@ bool CGameLogic::SetPlayerCharacterId( int characterId )
 
 bool CGameLogic::StartGame()
 {
+	/*
 	//////////////////////테스트용 플레이어 생성/////////////////////////////////////////////
 	m_PlayerData[0]= new PlayerData();
 	m_PlayerData[0]->m_CharacterId=1;
@@ -486,42 +493,55 @@ bool CGameLogic::StartGame()
 	m_PlayerData[2]->m_PlayerName="아이디2";
 	m_PlayerNumber=3;
 	///////////////////////////////////////////////////////////////////////////////////////////
-
+	*/
 	// 턴 생성 & 플레이어별로 턴 저장
 
 	//순서를 바꾼 후
-	std::array<int,4> tempTurn = {0,1,2,3};
+	std::array<int,4> tempTurn = {0, 1, 2, 3};
 	srand( static_cast<unsigned int>(time(NULL)) );
 	std::random_shuffle(tempTurn.begin(), tempTurn.end());
 
 	PlayerData* current;
-	int tempT=0;
-	for(int i = 0; i<m_PlayerNumber;++i)
+	int tempT = 0;
+	for (int i = 0; i < MAX_PLAYER_NUM; ++i)
 	{
-		if(tempTurn[tempT] >= m_PlayerNumber)
-			tempT++;
-		m_PlayerData[i]->m_PlayerTurn= tempTurn[tempT];
-		if(tempTurn[tempT] == 0)
+		if (m_PlayerData[i]->m_PlayerId == -1)
+			continue;
+
+		while (tempTurn[tempT] >= m_PlayerNumber)
+			++tempT;
+
+		m_PlayerData[i]->m_PlayerTurn = tempTurn[tempT];
+
+		if (tempTurn[tempT] == 0)
 			current = m_PlayerData[i];
-		tempT++;
+
+		++tempT;
 	}
+
+	//일단 current를 찾고, current->playerTurn + 1인 tempPlayer를 찾고
+	//current->next = tempPlayer
+	//current = tempPlayer
+	//다시 반복
 
 	//이제 링크드 리스트를 만들어주자!
-	for(int i = 0; i<m_PlayerNumber;i++)
+	m_FirstPlayer = current;
+
+	for (int i = 0; i < m_PlayerNumber; i++)
 	{
-		for(int j = 0; j<m_PlayerNumber;j++)
+		for (int j = 0; j < m_PlayerNumber; ++j)
 		{
-			if(m_PlayerData[i]->m_PlayerTurn+1 == m_PlayerData[j]->m_PlayerTurn)
+			if (m_PlayerData[i]->m_PlayerTurn+1 == m_PlayerData[j]->m_PlayerTurn)
 				m_PlayerData[i]->m_nextPlayer = m_PlayerData[j];
 		}
-		if(m_PlayerData[i]->m_PlayerTurn == 0)
-			m_FirstPlayer = m_PlayerData[i];
-		if(m_PlayerData[i]->m_nextPlayer ==nullptr)
+
+		if (m_PlayerData[i]->m_nextPlayer == nullptr)
 			tempT = i;
 	}
+
 	m_PlayerData[tempT]->m_nextPlayer = m_FirstPlayer;
 
-
+	CCLOG("player number : %d", m_PlayerNumber);
 
 
 
@@ -577,6 +597,8 @@ void CGameLogic::CreateMap()
 		// 조심해!! 방어코드를 넣어야해!! 여기 들어오면 뭔가 잘못된거다
 		return;
 	}
+
+	m_VoidTileCount = mapSize.m_Width * mapSize.m_Height;
 
 	for (targetRow = 1; targetRow <= mapSize.m_Height*2 + 1; ++targetRow)
 	{  		
