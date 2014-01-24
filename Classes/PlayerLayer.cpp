@@ -38,10 +38,7 @@ bool CPlayerLayer::init()
 			this->addChild(pTitle, 0);
 		}
 	}
-
-
-
-
+	
 	return true;
 
 }

@@ -90,7 +90,7 @@ void CMO_tile::update( float delta )
 
 		// 새롭게 설정된 소유자에 따라서 이미지 새로 생성 할당
 		// 만약 m_Owner가 MO_NOBODY 상태로 진입하면 큰일남
-		pTile = CCSprite::create(TileImageFileList[static_cast<int>(m_Owner)].c_str(), CCRectMake(0.0f, 0.0f, DEFAULT_TILE_SIZE,  DEFAULT_TILE_SIZE) );
+		pTile = CCSprite::create(TileImageFileList[static_cast<int>(CGameManager::GetInstance()->GetCharacterId(m_Owner))].c_str(), CCRectMake(0.0f, 0.0f, DEFAULT_TILE_SIZE,  DEFAULT_TILE_SIZE) );
 		pTile->setAnchorPoint( ccp(0, 0) );
 		pTile->setPosition( ccp(0.0f, 0.0f) );
 		this->addChild(pTile, 0);

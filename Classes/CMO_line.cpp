@@ -121,11 +121,6 @@ void CMO_line::update( float delta )
 		pLine->setPosition( ccp(0.0f, 0.0f) );
 		this->addChild(pLine, 0);
 	} 
-	else if (CGameManager::GetInstance()->IsConnected(m_Index) != MO_LINE_UNCONNECTED
-		&& CGameManager::GetInstance()->IsConnected(m_Index) != MO_LINE_CONNECTED)
-	{
-		CCLOG("strange : %d", CGameManager::GetInstance()->IsConnected(m_Index));
-	}
 }
 
 void CMO_line::setAnchorPoint()

@@ -762,7 +762,7 @@ bool CGameLogic::EventHandle(IndexedPosition indexedPosition)
 		while (m_ClosedTile[i].m_PosI != 0 && m_ClosedTile[i].m_PosJ != 0 )
 		{
 			//본래 타일에 뭐가 있었는지 확인해서 각자 바꿀 것!!
-			m_Map[m_ClosedTile[i].m_PosI][m_ClosedTile[i].m_PosJ].m_Owner = (MO_OWNER)(m_currentTurn % m_PlayerNumber);
+			m_Map[m_ClosedTile[i].m_PosI][m_ClosedTile[i].m_PosJ].m_Owner = (MO_OWNER)GetPlayerIdByTurn(m_currentTurn % m_PlayerNumber);
 			--m_VoidTileCount;
 			i++;
 		}
