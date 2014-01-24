@@ -301,7 +301,7 @@ void CGameLogic::CollectClosedTile( IndexedPosition indexedPosition, Direction d
 				{
 					searchTiles.push(nextTile);
 					m_ClosedTile[i++] = nextTile;
-					m_Map[nextTile.m_PosI][nextTile.m_PosI].m_Flag = true;
+					m_Map[nextTile.m_PosI][nextTile.m_PosJ].m_Flag = true;
 
 					//애니메이션 재생을 위한 순서와 방향 지정
 					animationTurn = GetTileAnimationTurn(currentTile) + 1;
@@ -368,7 +368,7 @@ void CGameLogic::CollectClosedTile( IndexedPosition indexedPosition, Direction d
 
 bool CGameLogic::IsAlreadyChecked( const IndexedPosition& nextTile )
 {
-	return m_Map[nextTile.m_PosI][nextTile.m_PosI].m_Flag;
+	return m_Map[nextTile.m_PosI][nextTile.m_PosJ].m_Flag;
 }
 
 void CGameLogic::SetAnimationState(IndexedPosition indexedPosition, int turn, Direction direction)
